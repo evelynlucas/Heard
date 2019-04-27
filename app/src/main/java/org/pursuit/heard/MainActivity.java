@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         setContentView(R.layout.activity_main);
 
         System.out.println("Hello World");
+        System.out.println("Hello World");
+
     }
 
     @Override
