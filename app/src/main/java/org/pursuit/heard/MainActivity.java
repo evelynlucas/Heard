@@ -7,8 +7,6 @@ import org.pursuit.heard.mainFragments.OnFragmentInteractionListener;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-    // TODO: Delete me later
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
