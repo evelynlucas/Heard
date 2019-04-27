@@ -3,7 +3,9 @@ package org.pursuit.heard;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import org.pursuit.heard.mainFragments.OnFragmentInteractionListener;
+
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -11,5 +13,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         System.out.println("Hello World");
+    }
+
+    @Override
+    public void onFragmentInteraction(Bundle bundle) {
+
     }
 }
