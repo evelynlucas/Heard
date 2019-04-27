@@ -26,6 +26,7 @@ public class MainUserFragment extends Fragment {
     public static MainUserFragment newInstance(Bundle bundle) {
         MainUserFragment fragment = new MainUserFragment();
         Bundle args = new Bundle();
+
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
