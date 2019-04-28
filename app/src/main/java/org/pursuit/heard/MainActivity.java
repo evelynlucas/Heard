@@ -4,11 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.pursuit.heard.database.ProfileDatabase;
+import org.pursuit.heard.database.UserProfile;
 import org.pursuit.heard.network.APIService;
 import org.pursuit.heard.network.RetrofitSingleton;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 import org.pursuit.heard.network.networkmodel.ResultsBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,15 +24,25 @@ import org.pursuit.heard.mainFragments.OnFragmentInteractionListener;
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private static final String TAG = "EvelynActivity";
+    ProfileDatabase profileDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        long id;
+        profileDatabase = ProfileDatabase.getInstance(this);
+        profileDatabase.addProfile("naomyp");
+        id = profileDatabase.getProfile("naomyp");
+        Log.d(".MAINACTIVITY", "id: " + id);
+
+        ArtistModel artistModel = new ArtistModel("Beyonce", "http");
+        profileDatabase.addArtist(id, artistModel);
+
         final Retrofit retrofit = RetrofitSingleton.getInstance();
         APIService apiService = retrofit.create(APIService.class);
-        String editTextString = "lil wayne";
+        final String editTextString = "lil wayne";
         final Call<ResultsBase> resultsBaseCall = apiService.getArtist(editTextString);
 
         resultsBaseCall.enqueue(new Callback<ResultsBase>() {
@@ -38,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 ResultsBase resultsBase = response.body();
                 List<ArtistModel> artistList = resultsBase.getResults();
                 Log.d(TAG, artistList.get(0).getArtistName());
+
+                // UserProfile mainUserProfile = new UserProfile("NP@pursuit.org", 10, artistList);
             }
 
             @Override
@@ -45,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
             }
         });
-
- 
-
     }
 
     @Override
