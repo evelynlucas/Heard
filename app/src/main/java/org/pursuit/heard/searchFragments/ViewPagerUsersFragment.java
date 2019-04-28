@@ -40,7 +40,7 @@ public class ViewPagerUsersFragment extends Fragment {
         ViewPagerUsersFragment fragment = new ViewPagerUsersFragment();
         Bundle args = new Bundle();
         args.putString(USERNAME, profile.getUsername());
-        args.putSerializable(ARTISTS, (Serializable) profile.getArtistList());
+        args.putSerializable(ARTISTS, (Serializable) profile.getArtists());
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,10 +68,12 @@ public class ViewPagerUsersFragment extends Fragment {
         TextView otherUsernameText = rootView.findViewById(R.id.viewPagerUser_profile_name);
         RecyclerView otherUserArtist = rootView.findViewById(R.id.recyclerView_container_viewPagerUserFragment);
         Button followButton = rootView.findViewById(R.id.viewPager_follow_button);
+        ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
 
         otherUsernameText.setText(otherUsername);
         otherUserArtist.setLayoutManager(new LinearLayoutManager(requireContext()));
-        otherUserArtist.setAdapter(new ArtistPresentAdapter(artists));
+        otherUserArtist.setAdapter(artistPresentAdapter);
+        artistPresentAdapter.setData(artists);
 
         followButton.setOnClickListener(new View.OnClickListener() {
             @Override

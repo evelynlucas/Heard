@@ -6,18 +6,17 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.pursuit.heard.R;
+
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 import org.pursuit.heard.view.ArtistPresentViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class ArtistPresentAdapter extends RecyclerView.Adapter<ArtistPresentViewHolder> {
 
-    private List<ArtistModel> userArtists;
-
-    public ArtistPresentAdapter(List<ArtistModel> userArtists) {
-        this.userArtists = userArtists;
-    }
+    private List<ArtistModel> userArtists = new ArrayList<>();
 
     @NonNull
     @Override
@@ -36,5 +35,10 @@ public class ArtistPresentAdapter extends RecyclerView.Adapter<ArtistPresentView
     @Override
     public int getItemCount() {
         return userArtists.size();
+    }
+
+    public void setData(List<ArtistModel> addArtist) {
+        this.userArtists = addArtist;
+        notifyDataSetChanged();
     }
 }

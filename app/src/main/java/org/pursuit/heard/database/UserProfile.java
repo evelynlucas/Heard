@@ -5,7 +5,7 @@ import org.pursuit.heard.network.networkmodel.ArtistModel;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserProfile implements Serializable {
+public class UserProfile {
 
     private String username;
     private long id;
@@ -40,11 +40,4 @@ public class UserProfile implements Serializable {
     public void setArtists(List<ArtistModel> artists) {
         this.artists = artists;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
-
-

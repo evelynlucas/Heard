@@ -18,29 +18,25 @@ import android.widget.TextView;
 import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
-import org.pursuit.heard.database.UserProfile;
+import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 
-import java.io.Serializable;
 import java.util.List;
-
 
 public class MainUserFragment extends Fragment {
 
     private static final String MAIN_USERNAME = "USER_MAIN";
-    private static final String MAIN_ARTISTS = "ARTISTS_MAIN";
 
     private String mainUsername;
-    private List<ArtistModel> mainArtists;
     private View rootView;
+    private OnFragmentInteractionListener listener;
 
     public MainUserFragment() {}
 
-    public static MainUserFragment newInstance(String mainProfile) {
+    public static MainUserFragment newInstance(String mainUsername) {
         MainUserFragment fragment = new MainUserFragment();
         Bundle args = new Bundle();
-        args.putString(MAIN_USERNAME, mainProfile);
-       // args.putSerializable(MAIN_ARTISTS, (Serializable) mainProfile.getArtistList());
+        args.putString(MAIN_USERNAME, mainUsername);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +46,6 @@ public class MainUserFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mainUsername = getArguments().getString(MAIN_USERNAME);
-            mainArtists = (List<ArtistModel>) getArguments().getSerializable(MAIN_ARTISTS);
         }
     }
 
@@ -62,22 +57,50 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         TextView mainUsernameText = rootView.findViewById(R.id.userMain_profile_name);
         RecyclerView mainUserArtists = rootView.findViewById(R.id.recyclerView_container_mainUserFragment);
         Button findButton = rootView.findViewById(R.id.search_nearby_button);
+        Button searchArtist = rootView.findViewById(R.id.search_artist_button);
 
-        mainUsernameText.setText(mainUsername);
+        mainUsernameText.setText("Hello " + mainUsername);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
-        mainUserArtists.setAdapter(new ArtistPresentAdapter(mainArtists));
+        ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
+        mainUserArtists.setAdapter(artistPresentAdapter);
+
+        ProfileDatabase database = ProfileDatabase.getInstance(view.getContext());
+        long id = database.getProfile(mainUsername);
+        List<ArtistModel> userModels = database.getArtists(id);
+        artistPresentAdapter.setData(userModels);
 
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), SecondActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        searchArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.openAddArtistFragment(mainUsername);
             }
         });
     }
