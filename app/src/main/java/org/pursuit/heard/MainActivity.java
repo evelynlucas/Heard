@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.pursuit.heard.database.Artist;
 import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.database.UserProfile;
 import org.pursuit.heard.network.APIService;
@@ -33,12 +34,16 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
         long id;
         profileDatabase = ProfileDatabase.getInstance(this);
-        profileDatabase.addProfile("naomyp");
+        //profileDatabase.addProfile("naomyp");
         id = profileDatabase.getProfile("naomyp");
         Log.d(".MAINACTIVITY", "id: " + id);
 
         ArtistModel artistModel = new ArtistModel("Beyonce", "http");
         profileDatabase.addArtist(id, artistModel);
+
+        List<ArtistModel> artist;
+        artist = profileDatabase.getArtists(id);
+        Log.d(".MAINACTIVITY", " artist: " + artist.get(0).getArtistName() + " artistURL: " + artist.get(0).getArtworkUrl100());
 
         final Retrofit retrofit = RetrofitSingleton.getInstance();
         APIService apiService = retrofit.create(APIService.class);

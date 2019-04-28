@@ -116,25 +116,40 @@ public class ProfileDatabase extends SQLiteOpenHelper {
     }
 
     public List<ArtistModel> getArtists(long userID){
-        List<ArtistModel>
-    }
+        List<ArtistModel> artistList = new ArrayList<>();
 
-    public List<UserProfile> getUserList(ArtistModel artistModel, UserProfile userProfile) {
-        List<UserProfile> logList = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_ARTISTS + ";", null);
 
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT " +  artistModel.getArtistName() + " FROM " +  TABLE_ARTISTS
-                + " INNER JOIN " + TABLE_USER + " ON " +  " WHERE id = " + userProfile.getId() + ";", null);
-
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-
-                } while (cursor.moveToNext());
+        if (cursor != null){
+            if (cursor.moveToFirst()){
+                do{
+                    ArtistModel artistModel = new ArtistModel(
+                            cursor.getString(cursor.getColumnIndex(ARTIST)),
+                            cursor.getString(cursor.getColumnIndex(ARTIST_URL)));
+                    artistList.add(artistModel);
+                }while (cursor.moveToNext());
             }
             cursor.close();
         }
-        return logList;
+        return artistList;
     }
+
+//    public List<UserProfile> getUserList(ArtistModel artistModel, UserProfile userProfile) {
+//        List<UserProfile> logList = new ArrayList<>();
+//
+//        Cursor cursor = getReadableDatabase().rawQuery("SELECT " +  artistModel.getArtistName() + " FROM " +  TABLE_ARTISTS
+//                + " INNER JOIN " + TABLE_USER + " ON " +  " WHERE id = " + userProfile.getId() + ";", null);
+//
+//        if (cursor != null) {
+//            if (cursor.moveToFirst()) {
+//                do {
+//
+//                } while (cursor.moveToNext());
+//            }
+//            cursor.close();
+//        }
+//        return logList;
+//    }
 
 //    public List<UserProfile> getProfiles() {
 //        List<UserProfile> profiles = new ArrayList<>();
