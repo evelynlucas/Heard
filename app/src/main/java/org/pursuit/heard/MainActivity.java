@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public void openAddArtistFragment(String username) {
         getSupportFragmentManager()
         .beginTransaction()
-        .add(R.id.mainfragments_container, AddArtistFragment.newInstance())
+        .replace(R.id.mainfragments_container, AddArtistFragment.newInstance(username))
+        .addToBackStack(null)
         .commit();
     }
 

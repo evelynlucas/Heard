@@ -25,15 +25,9 @@ import org.pursuit.heard.database.UserProfile;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
     private static final String SHARED_PREFS_KEY = "org.pursuit.heard";
     private static final String SHARED_PREFS_USERNAME_KEY = "Username";
-    private static final String SHARED_PREFS_PASSWORD_KEY = "Password";
     private static final String SHARED_PREFS_CHECKBOX = "isCheckBoxChecked";
 
     private EditText emailView;
@@ -43,24 +37,11 @@ public class LoginFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    public LoginFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,8 +50,6 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -89,7 +68,6 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -161,7 +139,7 @@ public class LoginFragment extends Fragment {
                 if (email.equals(userValue) && password.equals(passwordValue)) {
                     sharedPreferences.edit().putString(SHARED_PREFS_USERNAME_KEY, email).apply();
                     sharedPreferences.edit().putBoolean(SHARED_PREFS_CHECKBOX, true).apply();
-                    String username = "Talha";
+                    String username = "Alex";
                     mListener.loginToMainFragment(username);
                 }
             }
@@ -169,7 +147,7 @@ public class LoginFragment extends Fragment {
             if (!usernameCheckbox.isChecked()) {
                 sharedPreferences.edit().remove(SHARED_PREFS_USERNAME_KEY).apply();
                 if (email.equals(userValue) && password.equals(passwordValue)) {
-                    String username = "Talha";
+                    String username = "Alex";
                     mListener.loginToMainFragment(username);
                 }
             }

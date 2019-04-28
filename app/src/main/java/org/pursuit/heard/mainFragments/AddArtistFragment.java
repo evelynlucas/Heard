@@ -17,12 +17,10 @@ import org.pursuit.heard.network.ArtistPresenter;
 import org.pursuit.heard.network.NetworkCallback;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddArtistFragment extends Fragment implements SearchView.OnQueryTextListener{
 
-    private List<ArtistModel> artistModels = new ArrayList<>();
     private View rootView;
     private String mainUsername;
     private static final String MAIN_USERNAME = "USER_MAIN";
@@ -59,7 +57,7 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
 
         RecyclerView artistSearchRV = rootView.findViewById(R.id.artist_search_recyclerview);
         artistSearchRV.setLayoutManager(new LinearLayoutManager(requireContext()));
-        searchAdapter = new ArtistSearchAdapter(artistModels);
+        searchAdapter = new ArtistSearchAdapter(mainUsername);
         artistSearchRV.setAdapter(searchAdapter);
         SearchView artistSearch = rootView.findViewById(R.id.artist_searchview);
         artistSearch.setOnQueryTextListener(this);

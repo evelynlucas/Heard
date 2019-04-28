@@ -27,4 +27,5 @@ public class ArtistModel implements Serializable  {
     public void setArtworkUrl100(String artworkUrl100) {
         this.artworkUrl100 = artworkUrl100;
     }
+
 }
