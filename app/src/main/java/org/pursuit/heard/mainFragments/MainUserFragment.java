@@ -36,11 +36,11 @@ public class MainUserFragment extends Fragment {
 
     public MainUserFragment() {}
 
-    public static MainUserFragment newInstance(UserProfile mainProfile) {
+    public static MainUserFragment newInstance(String mainProfile) {
         MainUserFragment fragment = new MainUserFragment();
         Bundle args = new Bundle();
-        args.putString(MAIN_USERNAME, mainProfile.getUsername());
-        args.putSerializable(MAIN_ARTISTS, (Serializable) mainProfile.getArtistList());
+        args.putString(MAIN_USERNAME, mainProfile);
+       // args.putSerializable(MAIN_ARTISTS, (Serializable) mainProfile.getArtistList());
         fragment.setArguments(args);
         return fragment;
     }

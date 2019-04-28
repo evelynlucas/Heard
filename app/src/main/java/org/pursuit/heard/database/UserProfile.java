@@ -5,29 +5,28 @@ import org.pursuit.heard.network.networkmodel.ArtistModel;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserProfile {
+public class UserProfile implements Serializable {
 
     private String username;
     private long id;
+    private List<ArtistModel> artists;
+
+    public UserProfile(String username, long id, List<ArtistModel> artists) {
+        this.username = username;
+        this.id = id;
+        this.artists = artists;
+    }
 
     public String getUsername() {
         return username;
     }
 
-    private List<String> artists;
-
-    public List<String> getArtists() {
-        return artists;
-    }
-
-    public UserProfile(String username, List<String> artists, long id) {
-        this.username = username;
-        this.artists = artists;
-        this.id = id;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public List<ArtistModel> getArtists() {
+        return artists;
     }
 
     public void setUsername(String username) {
@@ -38,31 +37,14 @@ public class UserProfile {
         this.id = id;
     }
 
-    public void setArtists(List<String> artists) {
+    public void setArtists(List<ArtistModel> artists) {
         this.artists = artists;
     }
 
-    public UserProfile(String username, List<String> artists, List<ArtistModel> artistList) {
-        this.username = username;
-        this.artists = artists;
-        this.artistList = artistList;
-    }
-
-    private List<ArtistModel> artistList;
-
-    public List<ArtistModel> getArtistList() {
-        return artistList;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setArtists(List<String> artists) {
-        this.artists = artists;
-    }
-
-    public void setArtistList(List<ArtistModel> artistList) {
-        this.artistList = artistList;
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
+
+

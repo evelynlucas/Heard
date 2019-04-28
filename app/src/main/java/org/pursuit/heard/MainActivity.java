@@ -12,6 +12,7 @@ import org.pursuit.heard.network.RetrofitSingleton;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 import org.pursuit.heard.network.networkmodel.ResultsBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,10 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public void openAddArtistFragment(Bundle bundle) {
     }
 
-    @Override
-    public void onFragmentInteraction(Bundle bundle) {
-
-    }
 
     @Override
     public void loginToMainFragment(String username) {
