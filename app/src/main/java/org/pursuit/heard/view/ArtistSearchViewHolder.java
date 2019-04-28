@@ -31,6 +31,7 @@ public class ArtistSearchViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final ArtistModel artistModel, final String username) {
         artistResultName.setText(artistModel.getArtistName());
         Picasso.get().load(artistModel.getArtworkUrl100()).into(artistIcon);
+
         addArtistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

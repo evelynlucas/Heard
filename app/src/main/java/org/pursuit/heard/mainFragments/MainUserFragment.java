@@ -93,6 +93,7 @@ public class MainUserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), SecondActivity.class);
+                intent.putExtra("USERNAME", mainUsername);
                 startActivity(intent);
             }
         });

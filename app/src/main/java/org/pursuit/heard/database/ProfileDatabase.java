@@ -90,7 +90,7 @@ public class ProfileDatabase extends SQLiteOpenHelper {
 
         if (cursor != null){
             if (cursor.moveToFirst()){
-               return cursor.getLong(cursor.getColumnIndex(COL_ID_USER));
+                return cursor.getLong(cursor.getColumnIndex(COL_ID_USER));
             }
         }
 
