@@ -24,7 +24,6 @@ import org.pursuit.heard.network.networkmodel.ArtistModel;
 import java.io.Serializable;
 import java.util.List;
 
-
 public class MainUserFragment extends Fragment {
 
     private static final String MAIN_USERNAME = "USER_MAIN";
@@ -33,14 +32,15 @@ public class MainUserFragment extends Fragment {
     private String mainUsername;
     private List<ArtistModel> mainArtists;
     private View rootView;
+    private OnFragmentInteractionListener listener;
 
     public MainUserFragment() {}
 
-    public static MainUserFragment newInstance(UserProfile mainProfile) {
+    public static MainUserFragment newInstance(String mainUsername) {
         MainUserFragment fragment = new MainUserFragment();
         Bundle args = new Bundle();
-        args.putString(MAIN_USERNAME, mainProfile.getUsername());
-        args.putSerializable(MAIN_ARTISTS, (Serializable) mainProfile.getArtistList());
+        args.putString(MAIN_USERNAME, mainUsername);
+    //    args.putSerializable(MAIN_ARTISTS, (Serializable) mainProfile.getArtistList());
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,22 +62,44 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         TextView mainUsernameText = rootView.findViewById(R.id.userMain_profile_name);
         RecyclerView mainUserArtists = rootView.findViewById(R.id.recyclerView_container_mainUserFragment);
         Button findButton = rootView.findViewById(R.id.search_nearby_button);
+        Button searchArtist = rootView.findViewById(R.id.search_artist_button);
 
         mainUsernameText.setText(mainUsername);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
-        mainUserArtists.setAdapter(new ArtistPresentAdapter(mainArtists));
+   //     mainUserArtists.setAdapter(new ArtistPresentAdapter(mainArtists));
 
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), SecondActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        searchArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.openAddArtistFragment(mainUsername);
             }
         });
     }

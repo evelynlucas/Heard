@@ -24,12 +24,26 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
 
     private List<ArtistModel> artistModels = new ArrayList<>();
     private View rootView;
+    private String mainUsername;
+    private static final String MAIN_USERNAME = "USER_MAIN";
     private ArtistSearchAdapter searchAdapter;
 
     public AddArtistFragment() {}
 
-    public static AddArtistFragment newInstance() {
-        return new AddArtistFragment();
+    public static AddArtistFragment newInstance(String mainUsername) {
+        AddArtistFragment addArtistFragment = new AddArtistFragment();
+        Bundle args = new Bundle();
+        args.putString(MAIN_USERNAME, mainUsername);
+        addArtistFragment.setArguments(args);
+        return addArtistFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mainUsername = getArguments().getString(MAIN_USERNAME);
+        }
     }
 
     @Override

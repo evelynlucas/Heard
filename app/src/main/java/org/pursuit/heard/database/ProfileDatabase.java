@@ -68,7 +68,7 @@ public class ProfileDatabase extends SQLiteOpenHelper {
         cursor.close();
     }
 
-    public List<UserProfile> getProfiles() {
+/*    public List<UserProfile> getProfiles() {
         List<UserProfile> profiles = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_PROFILES + ";", null);
 
@@ -84,6 +84,6 @@ public class ProfileDatabase extends SQLiteOpenHelper {
             }
         }
         return profiles;
-    }
+    }*/
 }
 
