@@ -2,8 +2,8 @@ package org.pursuit.heard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
+import org.pursuit.heard.mainFragments.AddArtistFragment;
 import org.pursuit.heard.network.APIService;
 import org.pursuit.heard.network.RetrofitSingleton;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
@@ -27,7 +27,13 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Retrofit retrofit = RetrofitSingleton.getInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragments_container, AddArtistFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+
+     /*   final Retrofit retrofit = RetrofitSingleton.getInstance();
         APIService apiService = retrofit.create(APIService.class);
         String editTextString = "lil wayne";
         final Call<ResultsBase> resultsBaseCall = apiService.getArtist(editTextString);
@@ -44,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             public void onFailure(Call<ResultsBase> call, Throwable t) {
 
             }
-        });
-
- 
+        });*/
 
     }
 
