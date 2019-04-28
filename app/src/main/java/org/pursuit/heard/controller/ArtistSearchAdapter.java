@@ -9,14 +9,16 @@ import org.pursuit.heard.R;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 import org.pursuit.heard.view.ArtistSearchViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchViewHolder> {
 
-    private List<ArtistModel> models;
+    private List<ArtistModel> models = new ArrayList<>();
+    private String username;
 
-    public ArtistSearchAdapter(List<ArtistModel> models) {
-        this.models = models;
+    public ArtistSearchAdapter(String username) {
+        this.username = username;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ArtistSearchViewHolder artistSearchViewHolder, int position) {
-        artistSearchViewHolder.onBind(models.get(position));
+        artistSearchViewHolder.onBind(models.get(position), username);
     }
 
     @Override

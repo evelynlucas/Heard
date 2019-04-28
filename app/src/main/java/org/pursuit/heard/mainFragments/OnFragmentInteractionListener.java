@@ -8,7 +8,6 @@ public interface OnFragmentInteractionListener {
 
     void openAddArtistFragment(String username);
 
-
     void loginToMainFragment(String username);
 
 }
