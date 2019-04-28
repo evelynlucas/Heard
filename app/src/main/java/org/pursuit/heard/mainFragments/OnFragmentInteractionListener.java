@@ -6,7 +6,8 @@ import org.pursuit.heard.database.UserProfile;
 
 public interface OnFragmentInteractionListener {
 
-    void onFragmentInteraction(Bundle bundle);
+    void openAddArtistFragment(Bundle bundle);
+
 
     void loginToMainFragment(String username);
 

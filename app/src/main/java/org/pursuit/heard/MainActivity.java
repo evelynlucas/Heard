@@ -2,7 +2,8 @@ package org.pursuit.heard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
+import org.pursuit.heard.mainFragments.AddArtistFragment;
 
 import org.pursuit.heard.mainFragments.LoginFragment;
 import org.pursuit.heard.mainFragments.MainUserFragment;
@@ -22,8 +23,6 @@ import org.pursuit.heard.mainFragments.OnFragmentInteractionListener;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-    private static final String TAG = "EvelynActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainfragments_container, LoginFragment.newInstance())
+                .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void openAddArtistFragment(Bundle bundle) {
     }
 
     @Override
@@ -47,6 +51,5 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 .replace(R.id.mainfragments_container, MainUserFragment.newInstance(username))
                 .addToBackStack(null)
                 .commit();
-
     }
 }
