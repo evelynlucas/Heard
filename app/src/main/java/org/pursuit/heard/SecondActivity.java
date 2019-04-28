@@ -8,24 +8,28 @@ import android.support.v4.view.ViewPager;
 
 import org.pursuit.heard.controller.ViewPagerAdapter;
 import org.pursuit.heard.database.NearbyProfiles;
+import org.pursuit.heard.searchFragments.LoadFragment;
 import org.pursuit.heard.searchFragments.ViewPagerUsersFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondActivity extends FragmentActivity {
+public class SecondActivity extends FragmentActivity implements LoadFragment.MoveToVPFragment {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        Intent intent = getIntent();
-
-        createPagerFragments();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.profiles_viewpager, LoadFragment.newInstance())
+                .commit();
     }
 
-    private void createPagerFragments() {
+
+    @Override
+    public void onNearbyFound() {
         ViewPager viewPager = findViewById(R.id.profiles_viewpager);
         NearbyProfiles nearbyProfiles = new NearbyProfiles();
 
@@ -36,6 +40,5 @@ public class SecondActivity extends FragmentActivity {
         fragmentList.add(ViewPagerUsersFragment.newInstance(nearbyProfiles.getUser3()));
 
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragmentList));
-
     }
 }
