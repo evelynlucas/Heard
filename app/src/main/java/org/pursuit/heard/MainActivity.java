@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.pursuit.heard.mainFragments.LoginFragment;
+import org.pursuit.heard.mainFragments.MainUserFragment;
 import org.pursuit.heard.network.APIService;
 import org.pursuit.heard.network.RetrofitSingleton;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
@@ -27,31 +29,24 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Retrofit retrofit = RetrofitSingleton.getInstance();
-        APIService apiService = retrofit.create(APIService.class);
-        String editTextString = "lil wayne";
-        final Call<ResultsBase> resultsBaseCall = apiService.getArtist(editTextString);
-
-        resultsBaseCall.enqueue(new Callback<ResultsBase>() {
-            @Override
-            public void onResponse(Call<ResultsBase> call, Response<ResultsBase> response) {
-                ResultsBase resultsBase = response.body();
-                List<ArtistModel> artistList = resultsBase.getResults();
-                Log.d(TAG, artistList.get(0).getArtistName());
-            }
-
-            @Override
-            public void onFailure(Call<ResultsBase> call, Throwable t) {
-
-            }
-        });
-
- 
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragments_container, LoginFragment.newInstance())
+                .commit();
     }
 
     @Override
     public void onFragmentInteraction(Bundle bundle) {
+
+    }
+
+    @Override
+    public void loginToMainFragment(String username) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragments_container, MainUserFragment.newInstance(username))
+                .addToBackStack(null)
+                .commit();
 
     }
 }
