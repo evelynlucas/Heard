@@ -40,7 +40,7 @@ public class ViewPagerUsersFragment extends Fragment {
         ViewPagerUsersFragment fragment = new ViewPagerUsersFragment();
         Bundle args = new Bundle();
         args.putString(USERNAME, profile.getUsername());
-        args.putSerializable(ARTISTS, (Serializable) profile.getArtistList());
+        args.putSerializable(ARTISTS, (Serializable) profile.getArtists());
         fragment.setArguments(args);
         return fragment;
     }
