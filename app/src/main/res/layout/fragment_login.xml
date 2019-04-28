@@ -9,6 +9,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
+    android:background="@android:color/black"
     tools:context=".mainFragments.LoginFragment">
 
     <android.support.design.widget.TextInputLayout
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:background="@android:color/white"
             android:id="@+id/email_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,6 +34,7 @@
 
         <EditText
             android:id="@+id/password_edittext"
+            android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
@@ -51,9 +54,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Sign in"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@drawable/btn_shape_w"/>
 
     <CheckBox
+        android:background="@android:color/white"
         android:id="@+id/remember_username_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
