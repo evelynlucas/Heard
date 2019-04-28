@@ -50,7 +50,6 @@ public class SecondActivity extends FragmentActivity {
 
         List<Fragment> fragmentList = new ArrayList<>();
 
-
         fragmentList.add(ViewPagerUsersFragment.newInstance(nearbyProfiles.getUser1()));
         fragmentList.add(ViewPagerUsersFragment.newInstance(nearbyProfiles.getUser2()));
         fragmentList.add(ViewPagerUsersFragment.newInstance(nearbyProfiles.getUser3()));
