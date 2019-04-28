@@ -16,12 +16,10 @@ import android.widget.Toast;
 
 import org.pursuit.heard.R;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
-import org.pursuit.heard.database.Artist;
 import org.pursuit.heard.database.UserProfile;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 
 
