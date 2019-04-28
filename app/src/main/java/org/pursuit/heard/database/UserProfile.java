@@ -8,6 +8,7 @@ import java.util.List;
 public class UserProfile {
 
     private String username;
+    private long id;
 
     public String getUsername() {
         return username;
@@ -19,8 +20,25 @@ public class UserProfile {
         return artists;
     }
 
-    public UserProfile(String username, List<String> artists) {
+    public UserProfile(String username, List<String> artists, long id) {
         this.username = username;
+        this.artists = artists;
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setArtists(List<String> artists) {
         this.artists = artists;
     }
 

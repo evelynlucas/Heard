@@ -77,7 +77,8 @@ public class ProfileDatabase extends SQLiteOpenHelper {
                 do {
                     UserProfile profile = new UserProfile(
                             cursor.getString(cursor.getColumnIndex("username")),
-                            Collections.singletonList(cursor.getString(cursor.getColumnIndex("artists"))));
+                            Collections.singletonList(cursor.getString(cursor.getColumnIndex("artists"))),
+                            cursor.getLong(cursor.getColumnIndex("id")));
                     profiles.add(profile);
                 } while (cursor.moveToNext());
             }
