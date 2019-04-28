@@ -25,6 +25,7 @@
             android:layout_margin="20dp"
             android:gravity="center"
             android:text="Beyonce"
+            android:fontFamily="@font/cabin_medium"
             android:textSize="25sp" />
 
     </android.support.v7.widget.CardView>

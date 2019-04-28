@@ -25,16 +25,18 @@
             android:layout_margin="20dp"
             android:gravity="center"
             android:text="Beyonce"
+            android:fontFamily="@font/cabin_medium"
             android:textSize="25sp" />
 
         <Button
             android:id="@+id/add_artist_button"
             android:text="Add Artist"
-            android:background="@drawable/btn_shape_w"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/cabin_medium"
+            android:background="@drawable/btn_shape_w"/>
 
     </android.support.v7.widget.CardView>
 
