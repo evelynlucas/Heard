@@ -30,6 +30,7 @@
         <Button
             android:id="@+id/add_artist_button"
             android:text="Add Artist"
+            android:background="@drawable/btn_shape_w"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
