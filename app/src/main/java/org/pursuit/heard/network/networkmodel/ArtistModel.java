@@ -1,6 +1,8 @@
 package org.pursuit.heard.network.networkmodel;
 
-public class ArtistModel {
+import java.io.Serializable;
+
+public class ArtistModel implements Serializable  {
 
     private String artistName;
     private String artworkUrl100;
@@ -16,5 +18,13 @@ public class ArtistModel {
 
     public String getArtworkUrl100() {
         return artworkUrl100;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    public void setArtworkUrl100(String artworkUrl100) {
+        this.artworkUrl100 = artworkUrl100;
     }
 }

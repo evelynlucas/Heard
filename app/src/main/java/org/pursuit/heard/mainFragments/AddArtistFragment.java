@@ -22,7 +22,6 @@ import java.util.List;
 
 public class AddArtistFragment extends Fragment implements SearchView.OnQueryTextListener{
 
-    private static final String PARAM_KEY = "ID";
     private List<ArtistModel> artistModels = new ArrayList<>();
     private View rootView;
     private ArtistSearchAdapter searchAdapter;

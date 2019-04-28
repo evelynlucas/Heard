@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 public interface OnFragmentInteractionListener {
 
-    void onFragmentInteraction(Bundle bundle);
+    void openAddArtistFragment(Bundle bundle);
+
 
 }
