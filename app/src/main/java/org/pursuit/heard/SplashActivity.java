@@ -2,11 +2,12 @@ package org.pursuit.heard;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.pursuit.heard.animation.BounceInterpolator;
 
@@ -23,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         logText = findViewById(R.id.logo_text);
 
         final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        org.pursuit.heard.animation.BounceInterpolator bounceInterpolator = new BounceInterpolator(0.2, 20);
+        BounceInterpolator bounceInterpolator = new BounceInterpolator(0.2, 20);
         animation.setInterpolator(bounceInterpolator);
         logText.startAnimation(animation);
 

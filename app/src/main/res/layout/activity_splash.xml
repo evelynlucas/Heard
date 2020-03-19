@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
-    android:background="@android:color/black">
-
+    android:background="@android:color/black"
+    tools:context=".SplashActivity">
 
     <TextView
         android:id="@+id/logo_text"
@@ -28,22 +27,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
-<!--    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/av7_xml"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="448-ripple-loading-animation.json"
-        app:lottie_loop="true" />-->
+    <!--    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/av7_xml"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.359"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="448-ripple-loading-animation.json"
+            app:lottie_loop="true" />-->
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/av8_xml"
@@ -63,89 +62,89 @@
         app:lottie_loop="true" />
 
     <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:id="@+id/av9_xml"-->
-        <!--android:layout_width="400dp"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.454"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.359"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="4031-voice-recognition.json"-->
-        <!--app:lottie_loop="true" />-->
+    <!--android:id="@+id/av9_xml"-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.454"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.359"-->
+    <!--app:lottie_autoPlay="true"-->
+    <!--app:lottie_fileName="4031-voice-recognition.json"-->
+    <!--app:lottie_loop="true" />-->
 
     <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:id="@+id/av1_xml"-->
-        <!--android:layout_width="400dp"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.454"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.359"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="animation-w200-h200.json"-->
-        <!--app:lottie_loop="true" />-->
+    <!--android:id="@+id/av1_xml"-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.454"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.359"-->
+    <!--app:lottie_autoPlay="true"-->
+    <!--app:lottie_fileName="animation-w200-h200.json"-->
+    <!--app:lottie_loop="true" />-->
 
     <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:id="@+id/av3_xml"-->
-        <!--android:layout_width="400dp"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.454"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.359"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="animation-w200-h200 (1).json"-->
-        <!--app:lottie_loop="true" />-->
+    <!--android:id="@+id/av3_xml"-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.454"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.359"-->
+    <!--app:lottie_autoPlay="true"-->
+    <!--app:lottie_fileName="animation-w200-h200 (1).json"-->
+    <!--app:lottie_loop="true" />-->
 
     <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:id="@+id/av6_xml"-->
-        <!--android:layout_width="400dp"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.454"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.359"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="animation-w300-h300.json"-->
-        <!--app:lottie_loop="true" />-->
+    <!--android:id="@+id/av6_xml"-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.454"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.359"-->
+    <!--app:lottie_autoPlay="true"-->
+    <!--app:lottie_fileName="animation-w300-h300.json"-->
+    <!--app:lottie_loop="true" />-->
 
 
     <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:id="@+id/av11_xml"-->
-        <!--android:layout_width="400dp"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.454"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.359"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="animation-w600-h600 (1).json"-->
-        <!--app:lottie_loop="true" />-->
+    <!--android:id="@+id/av11_xml"-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.454"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.359"-->
+    <!--app:lottie_autoPlay="true"-->
+    <!--app:lottie_fileName="animation-w600-h600 (1).json"-->
+    <!--app:lottie_loop="true" />-->
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
