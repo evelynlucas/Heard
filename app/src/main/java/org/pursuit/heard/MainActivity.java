@@ -1,6 +1,6 @@
 package org.pursuit.heard;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import org.pursuit.heard.mainFragments.AddArtistFragment;
