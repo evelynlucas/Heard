@@ -16,9 +16,14 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainfragments_container, LoginFragment.newInstance())
+//                .addToBackStack(null)
+//                .commit();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainfragments_container, LoginFragment.newInstance())
+                .replace(R.id.mainfragments_container, MainUserFragment.newInstance("Alex"))
                 .addToBackStack(null)
                 .commit();
     }

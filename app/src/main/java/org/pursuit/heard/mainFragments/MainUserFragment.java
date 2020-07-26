@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
 import org.pursuit.heard.database.ProfileDatabase;
+import org.pursuit.heard.databinding.FragmentMainUserBinding;
 import org.pursuit.heard.network.networkmodel.ArtistModel;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class MainUserFragment extends Fragment {
     private String mainUsername;
     private View rootView;
     private OnFragmentInteractionListener listener;
+    private FragmentMainUserBinding binding;
 
     public MainUserFragment() {}
 
@@ -52,8 +55,9 @@ public class MainUserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView =  inflater.inflate(R.layout.fragment_main_user, container, false);
-        return rootView;
+        binding = DataBindingUtil
+                .inflate(inflater, R.layout.fragment_main_user, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -74,10 +78,10 @@ public class MainUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView mainUsernameText = rootView.findViewById(R.id.userMain_profile_name);
-        RecyclerView mainUserArtists = rootView.findViewById(R.id.recyclerView_container_mainUserFragment);
-        Button findButton = rootView.findViewById(R.id.search_nearby_button);
-        Button searchArtist = rootView.findViewById(R.id.search_artist_button);
+        TextView mainUsernameText = binding.userMainProfileName;
+        RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
+        Button findButton = binding.searchNearbyButton;
+        Button searchArtist = binding.searchArtistButton;
 
         mainUsernameText.setText("Hello " + mainUsername);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
