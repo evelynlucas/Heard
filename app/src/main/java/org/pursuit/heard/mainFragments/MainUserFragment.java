@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,12 +18,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
 import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
 import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
+import org.pursuit.heard.viewmodel.UserViewModel;
 
 import java.util.List;
 
@@ -53,7 +57,7 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_main_user, container, false);
@@ -61,7 +65,7 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             listener = (OnFragmentInteractionListener) context;
@@ -83,6 +87,8 @@ public class MainUserFragment extends Fragment {
         Button findButton = binding.searchNearbyButton;
         Button searchArtist = binding.searchArtistButton;
 
+  //      UserViewModel viewModel = ViewModelProvider.
+
         mainUsernameText.setText("Hello " + mainUsername);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
         ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
@@ -90,7 +96,7 @@ public class MainUserFragment extends Fragment {
 
         ProfileDatabase database = ProfileDatabase.getInstance(view.getContext());
         long id = database.getProfile(mainUsername);
-        List<ArtistModel> userModels = database.getArtists(id);
+        List<Artist> userModels = database.getArtists(id);
         artistPresentAdapter.setData(userModels);
 
         findButton.setOnClickListener(new View.OnClickListener() {

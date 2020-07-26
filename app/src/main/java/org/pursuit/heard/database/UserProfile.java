@@ -1,17 +1,16 @@
 package org.pursuit.heard.database;
 
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class UserProfile {
 
     private String username;
     private long id;
-    private List<ArtistModel> artists;
+    private List<Artist> artists;
 
-    public UserProfile(String username, long id, List<ArtistModel> artists) {
+    public UserProfile(String username, long id, List<Artist> artists) {
         this.username = username;
         this.id = id;
         this.artists = artists;
@@ -25,7 +24,7 @@ public class UserProfile {
         return id;
     }
 
-    public List<ArtistModel> getArtists() {
+    public List<Artist> getArtists() {
         return artists;
     }
 
@@ -37,7 +36,7 @@ public class UserProfile {
         this.id = id;
     }
 
-    public void setArtists(List<ArtistModel> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
 }

@@ -11,7 +11,7 @@ import android.view.View;
 import org.pursuit.heard.controller.ViewPagerAdapter;
 import org.pursuit.heard.database.NearbyProfiles;
 import org.pursuit.heard.database.ProfileDatabase;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.searchFragments.ViewPagerUsersFragment;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class SecondActivity extends FragmentActivity {
 
         ProfileDatabase database = ProfileDatabase.getInstance(getApplicationContext());
         long id = database.getProfile(username);
-        List<ArtistModel> myModels = database.getArtists(id);
+        List<Artist> myModels = database.getArtists(id);
 
         List<Fragment> fragmentList = new ArrayList<>();
 

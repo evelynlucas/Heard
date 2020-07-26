@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +97,7 @@ public class ProfileDatabase extends SQLiteOpenHelper {
         return 0;
     }
 
-    public void addArtist(long userId, ArtistModel artist) {
+    public void addArtist(long userId, Artist artist) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_ID_ARTIST, userId);
@@ -111,18 +111,18 @@ public class ProfileDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public List<ArtistModel> getArtists(long userID){
-        List<ArtistModel> artistList = new ArrayList<>();
+    public List<Artist> getArtists(long userID){
+        List<Artist> artistList = new ArrayList<>();
 
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_ARTISTS + ";", null);
 
         if (cursor != null){
             if (cursor.moveToFirst()){
                 do{
-                    ArtistModel artistModel = new ArtistModel(
+                    Artist artist = new Artist(
                             cursor.getString(cursor.getColumnIndex(ARTIST)),
                             cursor.getString(cursor.getColumnIndex(ARTIST_URL)));
-                    artistList.add(artistModel);
+                    artistList.add(artist);
                 }while (cursor.moveToNext());
             }
             cursor.close();

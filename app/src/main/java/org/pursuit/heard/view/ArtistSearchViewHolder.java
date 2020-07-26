@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import org.pursuit.heard.R;
 import org.pursuit.heard.database.ProfileDatabase;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
 public class ArtistSearchViewHolder extends RecyclerView.ViewHolder {
 
@@ -28,18 +28,18 @@ public class ArtistSearchViewHolder extends RecyclerView.ViewHolder {
         addArtistButton = itemView.findViewById(R.id.add_artist_button);
     }
 
-    public void onBind(final ArtistModel artistModel, final String username) {
-        artistResultName.setText(artistModel.getArtistName());
-        Picasso.get().load(artistModel.getArtworkUrl100()).into(artistIcon);
+    public void onBind(final Artist artist, final String username) {
+        artistResultName.setText(artist.getArtistName());
+        Picasso.get().load(artist.getArtworkUrl100()).into(artistIcon);
 
         addArtistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProfileDatabase database = ProfileDatabase.getInstance(v.getContext());
                 long id = database.getProfile(username);
-                database.addArtist(id, artistModel);
+                database.addArtist(id, artist);
 
-                Log.e("README", "onSuccess" + id + ", " + artistModel.getArtistName());
+                Log.e("README", "onSuccess" + id + ", " + artist.getArtistName());
             }
         });
     }

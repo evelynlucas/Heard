@@ -15,7 +15,7 @@ import org.pursuit.heard.R;
 import org.pursuit.heard.controller.ArtistSearchAdapter;
 import org.pursuit.heard.network.ArtistPresenter;
 import org.pursuit.heard.network.NetworkCallback;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
     public boolean onQueryTextSubmit(String artist) {
         new ArtistPresenter().networkCall(artist, new NetworkCallback() {
             @Override
-            public void onArtistReceived(List<ArtistModel> models) {
+            public void onArtistReceived(List<Artist> models) {
                 searchAdapter.setData(models);
             }
         });

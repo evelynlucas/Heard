@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.pursuit.heard.R;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.view.ArtistSearchViewHolder;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchViewHolder> {
 
-    private List<ArtistModel> models = new ArrayList<>();
+    private List<Artist> models = new ArrayList<>();
     private String username;
 
     public ArtistSearchAdapter(String username) {
@@ -39,7 +39,7 @@ public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchViewHo
         return models.size();
     }
 
-    public void setData(List<ArtistModel> searchResults) {
+    public void setData(List<Artist> searchResults) {
         this.models = searchResults;
         notifyDataSetChanged();
     }

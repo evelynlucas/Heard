@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.pursuit.heard.R;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
 public class ArtistPresentViewHolder extends RecyclerView.ViewHolder {
 
@@ -23,8 +23,8 @@ public class ArtistPresentViewHolder extends RecyclerView.ViewHolder {
         artistViewImage = itemView.findViewById(R.id.artistView_image);
     }
 
-    public void onBind(ArtistModel artistModel) {
-        artistViewName.setText(artistModel.getArtistName());
-        Picasso.get().load(artistModel.getArtworkUrl100()).into(artistViewImage);
+    public void onBind(Artist artist) {
+        artistViewName.setText(artist.getArtistName());
+        Picasso.get().load(artist.getArtworkUrl100()).into(artistViewImage);
     }
 }

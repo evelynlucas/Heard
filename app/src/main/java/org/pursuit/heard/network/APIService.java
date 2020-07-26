@@ -1,7 +1,6 @@
 package org.pursuit.heard.network;
 
-import org.pursuit.heard.network.networkmodel.ArtistModel;
-import org.pursuit.heard.network.networkmodel.ResultsBase;
+import org.pursuit.heard.model.ResultsBase;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -17,7 +17,7 @@ import android.widget.Toast;
 import org.pursuit.heard.R;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
 import org.pursuit.heard.database.UserProfile;
-import org.pursuit.heard.network.networkmodel.ArtistModel;
+import org.pursuit.heard.model.Artist;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ViewPagerUsersFragment extends Fragment {
     private static final String ARTISTS = "ARTISTS";
 
     private String otherUsername;
-    private List<ArtistModel> artists;
+    private List<Artist> artists;
     private View rootView;
 
     public ViewPagerUsersFragment() {}
@@ -48,7 +48,7 @@ public class ViewPagerUsersFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             otherUsername = getArguments().getString(USERNAME);
-            artists = (List<ArtistModel>) (getArguments().getSerializable(ARTISTS));
+            artists = (List<Artist>) (getArguments().getSerializable(ARTISTS));
         }
     }
 

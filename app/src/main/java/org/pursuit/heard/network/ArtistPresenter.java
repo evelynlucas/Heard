@@ -2,8 +2,8 @@ package org.pursuit.heard.network;
 
 import android.util.Log;
 
-import org.pursuit.heard.network.networkmodel.ArtistModel;
-import org.pursuit.heard.network.networkmodel.ResultsBase;
+import org.pursuit.heard.model.Artist;
+import org.pursuit.heard.model.ResultsBase;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ArtistPresenter {
                     @Override
                     public void onResponse(Call<ResultsBase> call, Response<ResultsBase> response) {
                         ResultsBase resultsBase = response.body();
-                        List<ArtistModel> artistList = resultsBase.getResults();
+                        List<Artist> artistList = resultsBase.getResults();
                         Log.d(TAG, "onSuccess: " +  artistList.get(0).getArtistName());
                         callback.onArtistReceived(artistList);
                     }
