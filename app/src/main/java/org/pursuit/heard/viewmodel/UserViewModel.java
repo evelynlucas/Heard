@@ -22,6 +22,11 @@ public class UserViewModel extends AndroidViewModel {
         super(application);
     }
 
+    public UserViewModel(@NonNull Application application, ProfileDatabase database) {
+        super(application);
+        this.database = database;
+    }
+
     public MutableLiveData<String> getCurrentUser() {
         return currentUser;
     }

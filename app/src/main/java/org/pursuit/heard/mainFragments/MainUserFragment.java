@@ -1,5 +1,6 @@
 package org.pursuit.heard.mainFragments;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +26,7 @@ import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
 import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.viewmodel.UserViewModel;
+import org.pursuit.heard.viewmodel.UserViewModelFactory;
 
 import java.util.List;
 
@@ -34,7 +35,6 @@ public class MainUserFragment extends Fragment {
     private static final String MAIN_USERNAME = "USER_MAIN";
 
     private String mainUsername;
-    private View rootView;
     private OnFragmentInteractionListener listener;
     private FragmentMainUserBinding binding;
 
@@ -53,6 +53,7 @@ public class MainUserFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mainUsername = getArguments().getString(MAIN_USERNAME);
+
         }
     }
 
@@ -79,7 +80,7 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         TextView mainUsernameText = binding.userMainProfileName;
@@ -87,14 +88,16 @@ public class MainUserFragment extends Fragment {
         Button findButton = binding.searchNearbyButton;
         Button searchArtist = binding.searchArtistButton;
 
-  //      UserViewModel viewModel = ViewModelProvider.
+        Application application = this.requireActivity().getApplication();
+        ProfileDatabase database = ProfileDatabase.getInstance(view.getContext());
+        UserViewModelFactory factory = new UserViewModelFactory(database, application);
+        UserViewModel viewModel = new ViewModelProvider(this, factory).get(UserViewModel.class);
 
         mainUsernameText.setText("Hello " + mainUsername);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
         ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
         mainUserArtists.setAdapter(artistPresentAdapter);
 
-        ProfileDatabase database = ProfileDatabase.getInstance(view.getContext());
         long id = database.getProfile(mainUsername);
         List<Artist> userModels = database.getArtists(id);
         artistPresentAdapter.setData(userModels);
@@ -102,7 +105,7 @@ public class MainUserFragment extends Fragment {
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), SecondActivity.class);
+                Intent intent = new Intent(view.getContext(), SecondActivity.class);
                 intent.putExtra("USERNAME", mainUsername);
                 startActivity(intent);
             }
