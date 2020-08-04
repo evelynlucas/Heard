@@ -17,7 +17,7 @@ public class ProfileDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "profiles.db";
     private static final String TABLE_USER = "User";
     private static final String TABLE_ARTISTS = "artists";
-    private static final int SCHEMA_VERSION = 1;
+    private static final int SCHEMA_VERSION = 2;
 
     private static final String USERNAME = "username";
     private static final String COL_ID_USER = "USERID";
