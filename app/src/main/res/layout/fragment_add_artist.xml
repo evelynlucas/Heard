@@ -1,42 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/search_cardview"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@id/artist_search_recyclerview"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="#000">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/artist_searchview"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/search_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="search artist name">
-            <requestFocus />
+            android:padding="10dp"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.appcompat.widget.SearchView>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/artist_searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:queryHint="search artist name">
 
-    </androidx.cardview.widget.CardView>
+                <requestFocus />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/artist_search_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_cardview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+            </androidx.appcompat.widget.SearchView>
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/artist_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_cardview"
+            app:layout_constraintVertical_bias="0.027">
+
+            <ImageView
+                android:id="@+id/artist_image"
+                android:background="#2196F3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"/>
+
+            <TextView
+                android:id="@+id/artist_result_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="Beyonce"
+                android:fontFamily="@font/cabin_medium"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/add_artist_button"
+                android:text="Add Artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/cabin_medium"
+                android:background="@drawable/btn_shape_w"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/artist_search_recyclerview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/search_cardview"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                >-->
+
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

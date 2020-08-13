@@ -49,7 +49,7 @@ public class MainUserFragment extends Fragment {
     public static MainUserFragment newInstance(UserViewModel viewModel) {
         MainUserFragment fragment = new MainUserFragment();
         Bundle args = new Bundle();
-        args.putSerializable(USER_VIEWMODEL, (Serializable) viewModel);
+        args.putSerializable(USER_VIEWMODEL, viewModel);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,22 +89,22 @@ public class MainUserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userName = viewModel.getCurrentUser();
-        TextView mainUsernameText = binding.userMainProfileName;
+   //     TextView mainUsernameText = binding.userMainProfileName;
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 
         setButtons();
 
-        mainUsernameText.setText("Hello " + userName);
+   //     mainUsernameText.setText("Hello " + userName);
         mainUserArtists.setLayoutManager(new LinearLayoutManager(requireContext()));
         final ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
         mainUserArtists.setAdapter(artistPresentAdapter);
-
 
         MutableLiveData<List<Artist>> likedArtists = viewModel.getLikedArtists();
         likedArtists.observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
             @Override
             public void onChanged(List<Artist> artists) {
                 artistPresentAdapter.setData(artists);
+                artistPresentAdapter.notifyDataSetChanged();
             }
         });
 
@@ -117,8 +117,8 @@ public class MainUserFragment extends Fragment {
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireContext(), SecondActivity.class);
-                intent.putExtra("USERNAME", userName);
+                Intent intent = new Intent(v.getContext(), SecondActivity.class);
+           //     intent.putExtra("USERNAME", userName);
                 startActivity(intent);
             }
         });
@@ -126,7 +126,7 @@ public class MainUserFragment extends Fragment {
         searchArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.openAddArtistFragment(userName);
+                listener.openAddArtistFragment(viewModel);
             }
         });
     }

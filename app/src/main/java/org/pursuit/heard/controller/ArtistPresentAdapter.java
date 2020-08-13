@@ -23,7 +23,7 @@ public class ArtistPresentAdapter extends RecyclerView.Adapter<ArtistPresentView
     public ArtistPresentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ArtistPresentViewHolder(LayoutInflater
                 .from(viewGroup.getContext())
-                .inflate(R.layout.artist_list_itemview,
+                .inflate(R.layout.artist_itemview,
                         viewGroup, false));
     }
 

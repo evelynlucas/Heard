@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="userViewModel"
+            type="org.pursuit.heard.viewmodel.UserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +24,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="Hello User"
+            tools:text="Hello User"
+            android:text="@{userViewModel.currentUser}"
             android:textSize="40sp"
             android:textColor="#fff"
             android:fontFamily="@font/cabin_condensed_bold"
@@ -39,7 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Favorite Artists"
+            android:text="@string/favorite_artists"
             android:textStyle="bold"
             android:textColor="@android:color/holo_red_light"
             android:fontFamily="@font/cabin_medium"
@@ -71,7 +74,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Search nearby"
+            android:text="@string/search_nearby"
             android:background="@drawable/btn_shape_w"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +91,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_shape_w"
-            android:text="Find Artists"
+            android:text="@string/find_artists"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

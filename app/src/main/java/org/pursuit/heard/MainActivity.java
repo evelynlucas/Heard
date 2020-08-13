@@ -40,14 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         userViewModel = new ViewModelProvider(this, factory).get(UserViewModel.class);
     }
 
-    @Override
-    public void openAddArtistFragment(String username) {
-        getSupportFragmentManager()
-        .beginTransaction()
-        .replace(R.id.mainfragments_container, AddArtistFragment.newInstance(username))
-        .addToBackStack(null)
-        .commit();
-    }
 
     @Override
     public void loginToMainFragment(String username) {
@@ -60,4 +52,14 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 .addToBackStack(null)
                 .commit();
     }
+
+    @Override
+    public void openAddArtistFragment(UserViewModel viewModel) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragments_container, AddArtistFragment.newInstance(userViewModel))
+                .addToBackStack(null)
+                .commit();
+    }
+
 }

@@ -11,11 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ArtistPresenter {
+public class ArtistRepository {
 
     private static final String TAG = "EvelynActivity";
 
-    public void networkCall(String artist, final NetworkCallback callback) {
+    public void networkCall(final String artist, final NetworkCallback callback) {
         RetrofitSingleton
                 .getInstance()
                 .create(APIService.class)
@@ -24,9 +24,12 @@ public class ArtistPresenter {
                     @Override
                     public void onResponse(Call<ResultsBase> call, Response<ResultsBase> response) {
                         ResultsBase resultsBase = response.body();
-                        List<Artist> artistList = resultsBase.getResults();
-                        Log.d(TAG, "onSuccess: " +  artistList.get(0).getArtistName());
-                        callback.onArtistReceived(artistList);
+                     //   List<Artist> artistList = resultsBase.getResults();
+                        assert resultsBase != null;
+                        Artist result = resultsBase.getResults().get(0);
+                        Log.d(TAG, "onSuccess: " +  result.getArtistName());
+                  //      callback.onArtistReceived(artistList);
+                        callback.onArtistReceived(result);
                     }
 
                     @Override

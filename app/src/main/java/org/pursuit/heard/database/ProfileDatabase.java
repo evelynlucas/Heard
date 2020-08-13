@@ -9,10 +9,11 @@ import android.util.Log;
 
 import org.pursuit.heard.model.Artist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileDatabase extends SQLiteOpenHelper {
+public class ProfileDatabase extends SQLiteOpenHelper  {
 
     private static final String DATABASE_NAME = "profiles.db";
     private static final String TABLE_USER = "User";

@@ -1,18 +1,19 @@
 package org.pursuit.heard;
 
-import android.content.Intent;
 import android.os.Handler;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
+
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import org.pursuit.heard.controller.ViewPagerAdapter;
 import org.pursuit.heard.database.NearbyProfiles;
-import org.pursuit.heard.database.ProfileDatabase;
-import org.pursuit.heard.model.Artist;
+
 import org.pursuit.heard.searchFragments.ViewPagerUsersFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ public class SecondActivity extends FragmentActivity {
         setContentView(R.layout.activity_second);
         final View anim = findViewById(R.id.av7_xml);
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra("USERNAME");
+      //  Intent intent = getIntent();
+     //   username = intent.getStringExtra("USERNAME");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -41,12 +42,20 @@ public class SecondActivity extends FragmentActivity {
     }
 
     private void createPagerFragments() {
+//        Application application = this.getApplication();
+//        ProfileDatabase profileDatabase = ProfileDatabase.getInstance(getApplicationContext());
+//        UserViewModelFactory factory = new UserViewModelFactory(profileDatabase, application);
+//        UserViewModel userViewModel = new ViewModelProvider(this, factory).get(UserViewModel.class);
+//
+//
+//        MutableLiveData<List<Artist>> myModel = userViewModel.getLikedArtists();
+
         ViewPager viewPager = findViewById(R.id.profiles_viewpager);
         NearbyProfiles nearbyProfiles = new NearbyProfiles();
 
-        ProfileDatabase database = ProfileDatabase.getInstance(getApplicationContext());
-        long id = database.getProfile(username);
-        List<Artist> myModels = database.getArtists(id);
+
+//        long id = database.getProfile(username);
+//        List<Artist> myModels = database.getArtists(id);
 
         List<Fragment> fragmentList = new ArrayList<>();
 

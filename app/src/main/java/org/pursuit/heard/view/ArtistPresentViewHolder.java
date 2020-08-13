@@ -19,8 +19,8 @@ public class ArtistPresentViewHolder extends RecyclerView.ViewHolder {
     public ArtistPresentViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        artistViewName = itemView.findViewById(R.id.artistView_name);
-        artistViewImage = itemView.findViewById(R.id.artistView_image);
+        artistViewName = itemView.findViewById(R.id.artist_name);
+        artistViewImage = itemView.findViewById(R.id.artist_image);
     }
 
     public void onBind(Artist artist) {

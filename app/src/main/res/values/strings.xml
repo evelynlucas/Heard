@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_username">user@pursuit.org</string>
     <string name="dummy_password">password</string>
+    <string name="favorite_artists">Favorite Artists</string>
+    <string name="find_artists">Find Artists</string>
+    <string name="search_nearby">Search nearby</string>
 </resources>
