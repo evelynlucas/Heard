@@ -7,15 +7,15 @@ import android.app.Application;
 import android.os.Bundle;
 
 import org.pursuit.heard.database.ProfileDatabase;
-import org.pursuit.heard.mainFragments.AddArtistFragment;
-import org.pursuit.heard.mainFragments.LoginFragment;
-import org.pursuit.heard.mainFragments.MainUserFragment;
+import org.pursuit.heard.fragments.AddArtistFragment;
+import org.pursuit.heard.fragments.LoginFragment;
+import org.pursuit.heard.fragments.MainUserFragment;
 
-import org.pursuit.heard.mainFragments.OnFragmentInteractionListener;
+import org.pursuit.heard.fragments.OnFragmentInteractionListener;
 import org.pursuit.heard.viewmodel.UserViewModel;
 import org.pursuit.heard.viewmodel.UserViewModelFactory;
 
-public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity  {
 
     private UserViewModel userViewModel;
     private ProfileDatabase profileDatabase;
@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainfragments_container, LoginFragment.newInstance())
-                .addToBackStack(null)
-                .commit();
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainfragments_container, LoginFragment.newInstance())
+//                .addToBackStack(null)
+//                .commit();
 
     }
 
@@ -41,25 +41,25 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     }
 
 
-    @Override
-    public void loginToMainFragment(String username) {
-        initBackend();
-        userViewModel.setCurrentUser(username);
-        profileDatabase.addProfile(username);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainfragments_container, MainUserFragment.newInstance(userViewModel))
-                .addToBackStack(null)
-                .commit();
-    }
-
-    @Override
-    public void openAddArtistFragment(UserViewModel viewModel) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainfragments_container, AddArtistFragment.newInstance(userViewModel))
-                .addToBackStack(null)
-                .commit();
-    }
+//    @Override
+//    public void loginToMainFragment(String username) {
+//        initBackend();
+//        userViewModel.setCurrentUser(username);
+//        profileDatabase.addProfile(username);
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainfragments_container, MainUserFragment.newInstance(userViewModel))
+//                .addToBackStack(null)
+//                .commit();
+//    }
+//
+//    @Override
+//    public void openAddArtistFragment(UserViewModel viewModel) {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainfragments_container, AddArtistFragment.newInstance(userViewModel))
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
 }

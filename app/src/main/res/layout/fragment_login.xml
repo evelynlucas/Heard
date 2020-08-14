@@ -10,7 +10,7 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
     android:background="@android:color/black"
-    tools:context=".mainFragments.LoginFragment">
+    tools:context=".fragments.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

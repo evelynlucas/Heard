@@ -1,8 +1,5 @@
-package org.pursuit.heard.mainFragments;
+package org.pursuit.heard.fragments;
 
-import android.os.Bundle;
-
-import org.pursuit.heard.database.UserProfile;
 import org.pursuit.heard.viewmodel.UserViewModel;
 
 public interface OnFragmentInteractionListener {

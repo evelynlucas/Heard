@@ -1,4 +1,4 @@
-package org.pursuit.heard.mainFragments;
+package org.pursuit.heard.fragments;
 
 
 import android.content.Context;

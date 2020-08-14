@@ -1,6 +1,5 @@
-package org.pursuit.heard.mainFragments;
+package org.pursuit.heard.fragments;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,29 +9,23 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
-import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
 import org.pursuit.heard.controller.ArtistPresentAdapter;
-import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
 import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.viewmodel.UserViewModel;
-import org.pursuit.heard.viewmodel.UserViewModelFactory;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class MainUserFragment extends Fragment {

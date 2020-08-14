@@ -1,12 +1,10 @@
-package org.pursuit.heard.mainFragments;
+package org.pursuit.heard.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
 import android.util.Log;
@@ -17,15 +15,12 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import org.pursuit.heard.R;
-import org.pursuit.heard.controller.ArtistSearchAdapter;
 import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentAddArtistBinding;
 import org.pursuit.heard.network.ArtistRepository;
 import org.pursuit.heard.network.NetworkCallback;
 import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.viewmodel.UserViewModel;
-
-import java.util.List;
 
 public class AddArtistFragment extends Fragment implements SearchView.OnQueryTextListener{
 
