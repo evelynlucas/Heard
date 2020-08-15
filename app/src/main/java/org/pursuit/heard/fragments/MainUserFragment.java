@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class MainUserFragment extends Fragment {
         Application application = requireActivity().getApplication();
         ProfileDatabase profileDatabase = ProfileDatabase.getInstance(requireContext());
         UserViewModelFactory factory = new UserViewModelFactory(profileDatabase, application);
-        viewModel = new ViewModelProvider(this, factory).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), factory).get(UserViewModel.class);
     }
 
     @Override
@@ -60,6 +61,8 @@ public class MainUserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userName = viewModel.getCurrentUser();
+        Log.d("MAINUSER", userName);
+        binding.userMainProfileName.setText("Hello " + userName);
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 
         setButtons();

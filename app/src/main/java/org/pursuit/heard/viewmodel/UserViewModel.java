@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserViewModel extends AndroidViewModel implements Serializable {
 
-    private String currentUser = "";
+    private String currentUser;
     private MutableLiveData<List<Artist>> likedArtists = new MutableLiveData<>();
     private ProfileDatabase database;
 

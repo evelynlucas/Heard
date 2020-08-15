@@ -2,6 +2,7 @@ package org.pursuit.heard.fragments;
 
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,12 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentLoginBinding;
 import org.pursuit.heard.viewmodel.UserViewModel;
 import org.pursuit.heard.viewmodel.UserViewModelFactory;
+
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -85,6 +88,8 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 attemptLogin();
                 if (logInSuccess) {
+                    InputMethodManager mgr = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(passwordView.getWindowToken(), 0);
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                 }
             }
@@ -114,24 +119,22 @@ public class LoginFragment extends Fragment {
             String userValue = getResources().getString(R.string.dummy_username);
             String passwordValue = getResources().getString(R.string.dummy_password);
 
+            boolean infoMatch = email.equals(userValue) && password.equals(passwordValue);
             if (usernameCheckbox.isChecked()) {
-                if (email.equals(userValue) && password.equals(passwordValue)) {
+                if (infoMatch) {
                     sharedPreferences.edit().putString(SHARED_PREFS_USERNAME_KEY, email).apply();
                     sharedPreferences.edit().putBoolean(SHARED_PREFS_CHECKBOX, true).apply();
-                    String username = "Alex";
-                    writeToBackend(username);
+                    writeToBackend(email);
+                    logInSuccess = true;
+                }
+            } else {
+                sharedPreferences.edit().remove(SHARED_PREFS_USERNAME_KEY).apply();
+                if (infoMatch) {
+                    writeToBackend(email);
                     logInSuccess = true;
                 }
             }
 
-            if (!usernameCheckbox.isChecked()) {
-                sharedPreferences.edit().remove(SHARED_PREFS_USERNAME_KEY).apply();
-                if (email.equals(userValue) && password.equals(passwordValue)) {
-                    String username = "Alex";
-                    writeToBackend(username);
-                    logInSuccess = true;
-                }
-            }
         }
 
         if (cancel) {
@@ -139,15 +142,16 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void writeToBackend(String username) {
+    private void writeToBackend(String email) {
         Application application = requireActivity().getApplication();
         ProfileDatabase profileDatabase = ProfileDatabase.getInstance(requireContext());
         UserViewModelFactory factory = new UserViewModelFactory(profileDatabase, application);
-        UserViewModel userViewModel = new ViewModelProvider(this, factory).get(UserViewModel.class);
-        if (profileDatabase.getProfile(username) == 0) {
-            profileDatabase.addProfile(username);
+        UserViewModel userViewModel = new ViewModelProvider(requireActivity(), factory).get(UserViewModel.class);
+        if (profileDatabase.getProfile(email) == 0) {
+            profileDatabase.addProfile(email);
         }
-        userViewModel.setCurrentUser(username.split("@")[0]);
+        String username = email.split("@")[0];
+        userViewModel.setCurrentUser(username.substring(0, 1).toUpperCase() + username.substring(1));
     }
 
     private boolean isEmailValid(String email) {
