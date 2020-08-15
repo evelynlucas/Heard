@@ -6,5 +6,9 @@
     <string name="dummy_password">password</string>
     <string name="favorite_artists">Favorite Artists</string>
     <string name="find_artists">Find Artists</string>
-    <string name="search_nearby">Search nearby</string>
+    <string name="search_nearby">Search Nearby</string>
+    <string name="email">e-mail</string>
+    <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login_checkbox">Check box to save username</string>
 </resources>

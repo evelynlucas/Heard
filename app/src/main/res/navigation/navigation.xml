@@ -19,5 +19,6 @@
         android:id="@+id/mainUserFragment"
         android:name="org.pursuit.heard.fragments.MainUserFragment"
         android:label="MainUserFragment"
-        tools:layout="@layout/fragment_main_user"/>
+        tools:layout="@layout/fragment_main_user">
+    </fragment>
 </navigation>

@@ -9,7 +9,6 @@ import android.util.Log;
 
 import org.pursuit.heard.model.Artist;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +25,7 @@ public class ProfileDatabase extends SQLiteOpenHelper  {
     private static final String USER_ID_ARTIST = "USER_ARTISTID";
 
     private static final String ARTIST = "artist";
-    private static final String ARTIST_URL = "artistUrl";
-
+    private static final String IMAGE_URL = "imageUrl";
 
     private static final String SQL_CREATE_USER_ENTRY =
             "CREATE TABLE " + TABLE_USER + " ("
@@ -39,7 +37,7 @@ public class ProfileDatabase extends SQLiteOpenHelper  {
                     + COL_ID_ARTIST + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     USER_ID_ARTIST + " INTEGER," +
                     ARTIST + " TEXT," +
-                    ARTIST_URL + " TEXT)";
+                    IMAGE_URL + " TEXT)";
 
     private static ProfileDatabase profileDatabaseInstance;
 
@@ -86,11 +84,11 @@ public class ProfileDatabase extends SQLiteOpenHelper  {
 
         String query = "SELECT " + COL_ID_USER + " FROM "
                 + TABLE_USER + " WHERE " + USERNAME + " = ?";
-        String selectionArgs[] = {username};
+        String selectionArgs[] = { username };
         Cursor cursor = this.getReadableDatabase().rawQuery(query, selectionArgs);
 
-        if (cursor != null){
-            if (cursor.moveToFirst()){
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
                 return cursor.getLong(cursor.getColumnIndex(COL_ID_USER));
             }
         }
@@ -103,7 +101,7 @@ public class ProfileDatabase extends SQLiteOpenHelper  {
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_ID_ARTIST, userId);
         contentValues.put(ARTIST, artist.getArtistName());
-        contentValues.put(ARTIST_URL, artist.getArtworkUrl100());
+        contentValues.put(IMAGE_URL, artist.getArtworkUrl100());
         try {
             long id = db.insertOrThrow(TABLE_ARTISTS, null, contentValues);
             Log.d("ProfileDatabase", "add artist: " + id);
@@ -119,12 +117,12 @@ public class ProfileDatabase extends SQLiteOpenHelper  {
 
         if (cursor != null){
             if (cursor.moveToFirst()){
-                do{
+                do {
                     Artist artist = new Artist(
                             cursor.getString(cursor.getColumnIndex(ARTIST)),
-                            cursor.getString(cursor.getColumnIndex(ARTIST_URL)));
+                            cursor.getString(cursor.getColumnIndex(IMAGE_URL)));
                     artistList.add(artist);
-                }while (cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
             cursor.close();
         }
