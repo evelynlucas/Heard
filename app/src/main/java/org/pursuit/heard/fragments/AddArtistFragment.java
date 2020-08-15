@@ -52,24 +52,39 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextSubmit(String artist) {
-        new ArtistRepository().networkCall(artist, new NetworkCallback() {
-            @Override
-            public void onArtistReceived(final Artist model) {
-                binding.artistCardView.setVisibility(View.VISIBLE);
-                binding.artistResultName.setText(model.getArtistName());
+        new ArtistRepository().networkCall(artist, model -> {
+            binding.artistCardView.setVisibility(View.VISIBLE);
+            binding.artistResultName.setText(model.getArtistName());
 
-                Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
+            Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
 
-                binding.addArtistButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        long id = database.getProfile(viewModel.getCurrentUser());
-                        database.addArtist(id, model);
-                        Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
-                    }
-                });
-            }
+            binding.addArtistButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    long id = database.getProfile(viewModel.getCurrentUser());
+                    database.addArtist(id, model);
+                    Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
+                }
+            });
         });
+//        new ArtistRepository().networkCall(artist, new NetworkCallback() {
+//            @Override
+//            public void onArtistReceived(final Artist model) {
+//                binding.artistCardView.setVisibility(View.VISIBLE);
+//                binding.artistResultName.setText(model.getArtistName());
+//
+//                Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
+//
+//                binding.addArtistButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        long id = database.getProfile(viewModel.getCurrentUser());
+//                        database.addArtist(id, model);
+//                        Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
+//                    }
+//                });
+//            }
+//        });
         return false;
     }
 
