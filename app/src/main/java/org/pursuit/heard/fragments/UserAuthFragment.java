@@ -1,7 +1,9 @@
 package org.pursuit.heard.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,12 +28,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.jakewharton.rxbinding3.view.RxView;
 
 import org.pursuit.heard.R;
 import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentLoginBinding;
 import org.pursuit.heard.viewmodel.UserViewModel;
 import org.pursuit.heard.viewmodel.UserViewModelFactory;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import kotlin.Unit;
+
+import static com.jakewharton.rxbinding3.view.RxView.*;
 
 public class UserAuthFragment extends Fragment {
 
@@ -40,6 +49,7 @@ public class UserAuthFragment extends Fragment {
     private EditText emailInput;
     private EditText passwordInput;
     private boolean logInSuccess = false;
+    private Disposable disposable;
 
     @Nullable
     @Override
@@ -51,32 +61,32 @@ public class UserAuthFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        passwordInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-//                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-//                    attemptLogin();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
-        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-                if (logInSuccess) {
-                    InputMethodManager mgr = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    mgr.hideSoftInputFromWindow(passwordInput.getWindowToken(), 0);
-                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
-                }
+        RxView.clicks(binding.emailSignInButton).subscribe(unit -> {
+            attemptLogin();
+            if (logInSuccess) {
+                InputMethodManager mgr = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(passwordInput.getWindowToken(), 0);
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
             }
         });
+
+
+//        binding.emailSignInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
+//                if (logInSuccess) {
+//                    InputMethodManager mgr = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    mgr.hideSoftInputFromWindow(passwordInput.getWindowToken(), 0);
+//                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
+//                }
+//            }
+//        });
     }
 
     private void attemptLogin() {
