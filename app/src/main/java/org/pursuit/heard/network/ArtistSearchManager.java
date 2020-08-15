@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class ArtistRepository {
+public class ArtistSearchManager {
 
     @SuppressLint("CheckResult")
     public void networkCall(final String artist, final NetworkCallback callback) {

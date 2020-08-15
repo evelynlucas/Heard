@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "763453556680",
+    "firebase_url": "https://heard-dfd2c.firebaseio.com",
+    "project_id": "heard-dfd2c",
+    "storage_bucket": "heard-dfd2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763453556680:android:2e9bd19a679b06580be2fd",
+        "android_client_info": {
+          "package_name": "org.pursuit.heard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763453556680-8e8e3g3k0o34n4776dpr6rd6taho55cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsTfyydcjbCF_C1b-vwRcG9tA7E7vCyTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763453556680-8e8e3g3k0o34n4776dpr6rd6taho55cm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "763453556680-gmjp65bk0c1fotbbh5ou7e2n1d9bvsf5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.talharahman.Heard-iOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

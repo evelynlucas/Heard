@@ -3,8 +3,6 @@ package org.pursuit.heard.fragments;
 import android.app.Application;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.SearchView;
@@ -20,9 +18,7 @@ import com.squareup.picasso.Picasso;
 import org.pursuit.heard.R;
 import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentAddArtistBinding;
-import org.pursuit.heard.network.ArtistRepository;
-import org.pursuit.heard.network.NetworkCallback;
-import org.pursuit.heard.model.Artist;
+import org.pursuit.heard.network.ArtistSearchManager;
 import org.pursuit.heard.viewmodel.UserViewModel;
 import org.pursuit.heard.viewmodel.UserViewModelFactory;
 
@@ -52,7 +48,7 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextSubmit(String artist) {
-        new ArtistRepository().networkCall(artist, model -> {
+        new ArtistSearchManager().networkCall(artist, model -> {
             binding.artistCardView.setVisibility(View.VISIBLE);
             binding.artistResultName.setText(model.getArtistName());
 
