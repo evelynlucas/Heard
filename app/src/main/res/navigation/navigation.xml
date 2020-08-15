@@ -20,5 +20,14 @@
         android:name="org.pursuit.heard.fragments.MainUserFragment"
         android:label="MainUserFragment"
         tools:layout="@layout/fragment_main_user">
+        <action
+            android:id="@+id/action_mainUserFragment_to_addArtistFragment"
+            app:destination="@id/addArtistFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addArtistFragment"
+        android:name="org.pursuit.heard.fragments.AddArtistFragment"
+        android:label="AddArtistFragment"
+        tools:layout="@layout/fragment_add_artist"/>
 </navigation>

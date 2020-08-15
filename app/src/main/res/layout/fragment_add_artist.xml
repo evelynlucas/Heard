@@ -56,16 +56,16 @@
                 android:id="@+id/artist_result_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_margin="20dp"
                 android:gravity="center"
-                android:text="Beyonce"
+                tools:text="Beyonce"
                 android:fontFamily="@font/cabin_medium"
                 android:textSize="25sp" />
 
             <Button
                 android:id="@+id/add_artist_button"
-                android:text="Add Artist"
+                android:text="@string/add_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

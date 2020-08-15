@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +62,6 @@ public class MainUserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userName = viewModel.getCurrentUser();
-        Log.d("MAINUSER", userName);
         binding.userMainProfileName.setText("Hello " + userName);
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 
@@ -98,7 +98,7 @@ public class MainUserFragment extends Fragment {
         searchArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-          //      listener.openAddArtistFragment(viewModel);
+                Navigation.findNavController(v).navigate(R.id.action_mainUserFragment_to_addArtistFragment);
             }
         });
     }

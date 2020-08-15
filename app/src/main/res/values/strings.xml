@@ -11,4 +11,5 @@
     <string name="password">password</string>
     <string name="sign_in">Sign In</string>
     <string name="login_checkbox">Check box to save username</string>
+    <string name="add_artist">Add Artist</string>
 </resources>
