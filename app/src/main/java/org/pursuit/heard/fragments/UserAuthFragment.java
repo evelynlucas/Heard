@@ -27,6 +27,8 @@ import org.pursuit.heard.R;
 import org.pursuit.heard.databinding.FragmentLoginBinding;
 import org.pursuit.heard.viewmodel.UserViewModel;
 
+import java.util.Objects;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -57,17 +59,20 @@ public class UserAuthFragment extends Fragment {
                         getString(R.string.shared_prefs_key),
                         Context.MODE_PRIVATE);
 
-        if (preferences.contains(getString(R.string.login_checkbox_key))) {
+        if (preferences.getBoolean(
+                getString(R.string.login_checkbox_key), true)) {
             if (preferences.contains(getString(R.string.user_name_key))) {
                 String savedUser = preferences.getString(
                         getString(R.string.user_name_key), "");
                 binding.emailEdittext.setText(savedUser);
+                binding.rememberMeCheckbox.setChecked(true);
             }
 
             if (preferences.contains(getString(R.string.password_key))) {
                 String savedPassword = preferences.getString(
                         getString(R.string.password_key), "");
                 binding.passwordEdittext.setText(savedPassword);
+                binding.rememberMeCheckbox.setChecked(true);
             }
             binding.rememberMeCheckbox.setChecked(true);
         }
@@ -88,7 +93,6 @@ public class UserAuthFragment extends Fragment {
 
         disposable = RxView
                 .clicks(binding.rememberMeCheckbox)
-                .subscribeOn(Schedulers.io())
                 .subscribe(unit -> {
                     if (binding.rememberMeCheckbox.isChecked()) {
                         preferences.edit().putBoolean(
@@ -104,14 +108,15 @@ public class UserAuthFragment extends Fragment {
                         preferences.edit().remove(UserAuthFragment.this.getString(R.string.user_name_key)).apply();
                         preferences.edit().remove(UserAuthFragment.this.getString(R.string.password_key)).apply();
                     }
-                }, Throwable::printStackTrace);
+                });
+
 
         disposable = RxView.clicks(binding.emailSignInButton)
                 .subscribe(unit -> {
+                    InputMethodManager mgr = (InputMethodManager) requireActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
                     if (viewModel.verifyLogin(emailInput, passwordInput)) {
-                        Log.d("USERAUTH", "Login success");
-                        InputMethodManager mgr = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }
                 });

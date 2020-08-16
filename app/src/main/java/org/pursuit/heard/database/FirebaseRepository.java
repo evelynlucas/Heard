@@ -15,28 +15,24 @@ public class FirebaseRepository {
     private FirebaseUser currentUser;
     private boolean loginSuccessful;
 
+
+    public void verifyLogin(String email, String password) {
+        authorization
+                .signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if ((task.isSuccessful())) {
+                        this.currentUser = authorization.getCurrentUser();
+                        setLoginSuccessful(true);
+                    } else setLoginSuccessful(false);
+                });
+    }
+
     public void setLoginSuccessful(boolean loginSuccessful) {
         this.loginSuccessful = loginSuccessful;
     }
 
     public boolean isLoginSuccessful() {
         return loginSuccessful;
-    }
-
-    public void verifyLogin(String email, String password) {
-        AtomicBoolean loginSuccessful = new AtomicBoolean(false);
-        authorization
-                .signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if ((task.isSuccessful())) {
-                        this.currentUser = authorization.getCurrentUser();
-                        Log.d("FIREBASE", "login success");
-                        setLoginSuccessful(true);
-                    } else {
-                        Log.d("FIREBASE", "login failure");
-                        setLoginSuccessful(false);
-                    }
-                });
     }
 
     public FirebaseAuth getAuthorization() {
