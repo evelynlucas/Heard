@@ -61,18 +61,14 @@ public class UserAuthFragment extends Fragment {
 
         if (preferences.getBoolean(
                 getString(R.string.login_checkbox_key), true)) {
-            if (preferences.contains(getString(R.string.user_name_key))) {
+            if (preferences.contains(getString(R.string.user_name_key)) &&
+                    preferences.contains(getString(R.string.password_key))) {
                 String savedUser = preferences.getString(
                         getString(R.string.user_name_key), "");
-                binding.emailEdittext.setText(savedUser);
-                binding.rememberMeCheckbox.setChecked(true);
-            }
-
-            if (preferences.contains(getString(R.string.password_key))) {
                 String savedPassword = preferences.getString(
                         getString(R.string.password_key), "");
+                binding.emailEdittext.setText(savedUser);
                 binding.passwordEdittext.setText(savedPassword);
-                binding.rememberMeCheckbox.setChecked(true);
             }
             binding.rememberMeCheckbox.setChecked(true);
         }
@@ -111,11 +107,13 @@ public class UserAuthFragment extends Fragment {
                 });
 
 
-        disposable = RxView.clicks(binding.emailSignInButton)
+        disposable = RxView
+                .clicks(binding.emailSignInButton)
                 .subscribe(unit -> {
                     InputMethodManager mgr = (InputMethodManager) requireActivity()
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
+
                     if (viewModel.verifyLogin(emailInput, passwordInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }

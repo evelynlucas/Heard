@@ -46,21 +46,16 @@ public class MainUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_main_user, container, false);
-        initBackend();
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         return binding.getRoot();
     }
 
-    private void initBackend() {
-        ProfileDatabase profileDatabase = ProfileDatabase.getInstance(requireContext());
-        UserViewModelFactory factory = new UserViewModelFactory();
-        viewModel = new ViewModelProvider(requireActivity(), factory).get(UserViewModel.class);
-    }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-   //     userName = viewModel.getCurrentUser();
+        userName = viewModel.getUserName();
         binding.userMainProfileName.setText("Hello " + userName);
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 
