@@ -2,7 +2,10 @@ package org.pursuit.heard.network;
 
 import android.annotation.SuppressLint;
 
+import org.pursuit.heard.model.Artist;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ArtistSearchManager {
@@ -15,7 +18,17 @@ public class ArtistSearchManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(resultsBase -> resultsBase.getResults().get(0))
-                .subscribe(callback::onArtistReceived, Throwable::printStackTrace);
+                .subscribe(new Consumer<Artist>() {
+                    @Override
+                    public void accept(Artist model) throws Exception {
+                        callback.onArtistReceived(model);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
 
