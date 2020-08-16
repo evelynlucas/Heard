@@ -51,9 +51,8 @@ public class MainUserFragment extends Fragment {
     }
 
     private void initBackend() {
-        Application application = requireActivity().getApplication();
         ProfileDatabase profileDatabase = ProfileDatabase.getInstance(requireContext());
-        UserViewModelFactory factory = new UserViewModelFactory(profileDatabase, application);
+        UserViewModelFactory factory = new UserViewModelFactory();
         viewModel = new ViewModelProvider(requireActivity(), factory).get(UserViewModel.class);
     }
 
@@ -61,7 +60,7 @@ public class MainUserFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userName = viewModel.getCurrentUser();
+   //     userName = viewModel.getCurrentUser();
         binding.userMainProfileName.setText("Hello " + userName);
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 
@@ -71,14 +70,14 @@ public class MainUserFragment extends Fragment {
         final ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
         mainUserArtists.setAdapter(artistPresentAdapter);
 
-        MutableLiveData<List<Artist>> likedArtists = viewModel.getLikedArtists();
-        likedArtists.observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> artists) {
-                artistPresentAdapter.setData(artists);
-                artistPresentAdapter.notifyDataSetChanged();
-            }
-        });
+//        MutableLiveData<List<Artist>> likedArtists = viewModel.getLikedArtists();
+//        likedArtists.observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
+//            @Override
+//            public void onChanged(List<Artist> artists) {
+//                artistPresentAdapter.setData(artists);
+//                artistPresentAdapter.notifyDataSetChanged();
+//            }
+//        });
 
     }
 

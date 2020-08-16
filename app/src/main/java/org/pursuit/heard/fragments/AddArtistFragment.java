@@ -40,9 +40,8 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
     }
 
     private void initBackend() {
-        Application application = requireActivity().getApplication();
         database = ProfileDatabase.getInstance(requireContext());
-        UserViewModelFactory factory = new UserViewModelFactory(database, application);
+        UserViewModelFactory factory = new UserViewModelFactory();
         viewModel = new ViewModelProvider(requireActivity(), factory).get(UserViewModel.class);
     }
 
@@ -51,36 +50,17 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
         new ArtistSearchManager().networkCall(artist, model -> {
             binding.artistCardView.setVisibility(View.VISIBLE);
             binding.artistResultName.setText(model.getArtistName());
-
             Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
 
             binding.addArtistButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long id = database.getProfile(viewModel.getCurrentUser());
-                    database.addArtist(id, model);
-                    Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
+//                    long id = database.getProfile(viewModel.getCurrentUser());
+//                    database.addArtist(id, model);
+//                    Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
                 }
             });
         });
-//        new ArtistRepository().networkCall(artist, new NetworkCallback() {
-//            @Override
-//            public void onArtistReceived(final Artist model) {
-//                binding.artistCardView.setVisibility(View.VISIBLE);
-//                binding.artistResultName.setText(model.getArtistName());
-//
-//                Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
-//
-//                binding.addArtistButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        long id = database.getProfile(viewModel.getCurrentUser());
-//                        database.addArtist(id, model);
-//                        Log.e("README", "onSuccess" + id + ", " + model.getArtistName());
-//                    }
-//                });
-//            }
-//        });
         return false;
     }
 
