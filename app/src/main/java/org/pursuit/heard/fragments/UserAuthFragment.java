@@ -1,16 +1,13 @@
 package org.pursuit.heard.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.jakewharton.rxbinding3.widget.RxTextView;
 
@@ -27,10 +23,7 @@ import org.pursuit.heard.R;
 import org.pursuit.heard.databinding.FragmentLoginBinding;
 import org.pursuit.heard.viewmodel.UserViewModel;
 
-import java.util.Objects;
-
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class UserAuthFragment extends Fragment {
 
@@ -47,7 +40,6 @@ public class UserAuthFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         checkPreferences();
         return binding.getRoot();
@@ -63,10 +55,12 @@ public class UserAuthFragment extends Fragment {
                 getString(R.string.login_checkbox_key), true)) {
             if (preferences.contains(getString(R.string.user_name_key)) &&
                     preferences.contains(getString(R.string.password_key))) {
+                
                 String savedUser = preferences.getString(
                         getString(R.string.user_name_key), "");
                 String savedPassword = preferences.getString(
                         getString(R.string.password_key), "");
+
                 binding.emailEdittext.setText(savedUser);
                 binding.passwordEdittext.setText(savedPassword);
             }
