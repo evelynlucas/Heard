@@ -49,6 +49,10 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.updateFollowedArtists(artist);
     }
 
+    public void fetchMyArtists() {
+
+    }
+
 
     //
 //    private String currentUser;

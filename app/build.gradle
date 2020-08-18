@@ -70,4 +70,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.5.0'
     implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.firebase:firebase-firestore:21.5.0'
+
+    implementation 'com.github.FrangSierra:RxFirebase:1.5.6'
+
+    implementation 'com.oakwoodsc.rxfirestore:rxfirestore:1.2.0'
 }
