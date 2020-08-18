@@ -1,8 +1,7 @@
 package org.pursuit.heard.utils;
 
-public class Constants {
+public class C {
 
-    // Firebase fields
     public static final String PROFILES = "profiles";
     public static final String ARTISTS = "artists";
     public static final String USER_ID = "userID";
