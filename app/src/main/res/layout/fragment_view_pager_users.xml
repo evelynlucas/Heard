@@ -47,7 +47,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="follow"
-                android:background="@drawable/btn_shape_w"/>
+                android:background="@drawable/btn_shape_white"/>
 
             <TextView
                 android:id="@+id/textView"

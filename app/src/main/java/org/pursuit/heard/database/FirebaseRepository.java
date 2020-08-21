@@ -3,9 +3,11 @@ package org.pursuit.heard.database;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -18,6 +20,7 @@ import org.pursuit.heard.utils.C;
 import java.util.HashMap;
 import java.util.Map;
 
+import durdinapps.rxfirebase2.DataSnapshotMapper;
 import durdinapps.rxfirebase2.RxFirebaseAuth;
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
 import durdinapps.rxfirebase2.RxFirestore;
@@ -34,7 +37,30 @@ public class FirebaseRepository {
     private final CollectionReference artists = database.collection(C.ARTISTS);
 
     private FirebaseUser currentUser;
+    private DocumentReference userDocRef;
     private boolean loginSuccessful;
+
+    @SuppressLint("CheckResult")
+    public void createUser(String email, String password, String username) {
+        RxFirebaseAuth
+                .createUserWithEmailAndPassword(authorization, email, password)
+                .subscribeOn(Schedulers.io())
+                .map(AuthResult::getUser)
+                .subscribe(s -> {
+                    Log.d("AUTH", "reached here: " + username);
+                    setDoc(username);
+                }, Throwable::printStackTrace);
+    }
+
+    @SuppressLint("CheckResult")
+    private void setDoc(String username) {
+        Map<String, String> update = new HashMap<>();
+        update.put("username", username);
+        RxFirestoreDb.set(profiles.document(), update)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> setLoginSuccessful(true),
+                        Throwable::printStackTrace);
+    }
 
     @SuppressLint("CheckResult")
     public void verifyLogin(String email, String password) {
@@ -45,7 +71,6 @@ public class FirebaseRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(logged -> {
                     this.currentUser = authorization.getCurrentUser();
-                    Log.d("AUTH", "currentuser: " + currentUser.getUid());
                     setLoginSuccessful(true);
                 }, Throwable::printStackTrace);
     }
@@ -68,6 +93,12 @@ public class FirebaseRepository {
 
     public FirebaseUser getCurrentUser() {
         return currentUser;
+    }
+
+    public void fetchFollowedArtists() {
+        Query query = profiles.whereEqualTo(C.USER_ID, currentUser.getUid());
+        //     RxFirebaseDatabase.observeSingleValueEvent(query, Artist.class)
+
     }
 
     public void updateFollowedArtists(Artist artist) {

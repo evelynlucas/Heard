@@ -36,7 +36,7 @@
             android:layout_margin="10dp"
             android:layout_gravity="bottom"
             android:fontFamily="@font/cabin_medium"
-            android:background="@drawable/btn_shape_w"/>
+            android:background="@drawable/btn_shape_white"/>
 
     </androidx.cardview.widget.CardView>
 

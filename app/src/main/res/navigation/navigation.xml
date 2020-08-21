@@ -3,21 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/welcomeFragment">
 
-<!--    <fragment-->
-<!--        android:id="@+id/loginFragment"-->
-<!--        android:name="org.pursuit.heard.fragments.LoginFragment"-->
-<!--        android:label="fragment_login"-->
-<!--        tools:layout="@layout/fragment_login" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_mainUserFragment"-->
-<!--            app:destination="@id/mainUserFragment" />-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="org.pursuit.heard.fragments.WelcomeFragment"
+        tools:layout="@layout/welcome_fragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="org.pursuit.heard.fragments.UserAuthFragment"
+        android:name="org.pursuit.heard.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -40,4 +45,10 @@
         android:name="org.pursuit.heard.fragments.AddArtistFragment"
         android:label="AddArtistFragment"
         tools:layout="@layout/fragment_add_artist"/>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_signup"
+        android:name="org.pursuit.heard.fragments.SignUpFragment"
+        android:label="SignUpFragment" />
 </navigation>

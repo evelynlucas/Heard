@@ -18,7 +18,11 @@ public class UserViewModel extends ViewModel implements Serializable {
 
     private MutableLiveData<List<Artist>> followedArtists = new MutableLiveData<>();
 
-    public Boolean verifyLogin(String email, String password) {
+    public void setNewUser(String email, String password, String username) {
+        database.createUser(email, password, username);
+    }
+
+    public boolean verifyLogin(String email, String password) {
         database.verifyLogin(email, password);
         if (database.isLoginSuccessful()) {
             String tempUsername = email.split("@")[0];
@@ -49,9 +53,7 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.updateFollowedArtists(artist);
     }
 
-    public void fetchMyArtists() {
-
-    }
+ //   public MutableLiveData<List<Artist>> getFollowedArtists() { }
 
 
     //

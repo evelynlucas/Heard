@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp"
-                android:background="@drawable/btn_shape_w"
+                android:background="@drawable/btn_shape_white"
                 android:fontFamily="@font/cabin_medium"
                 android:text="@string/add_artist" />
 

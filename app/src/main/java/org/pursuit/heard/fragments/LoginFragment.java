@@ -1,10 +1,8 @@
 package org.pursuit.heard.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,7 @@ import org.pursuit.heard.viewmodel.UserViewModel;
 
 import io.reactivex.disposables.Disposable;
 
-public class UserAuthFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
     private UserViewModel viewModel;
@@ -69,41 +67,43 @@ public class UserAuthFragment extends Fragment {
         }
     }
 
-    @SuppressLint("CheckResult")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         disposable = RxTextView
                 .textChanges(binding.emailEdittext)
-                .subscribe(input -> emailInput = input.toString());
+                .subscribe(input -> emailInput = input.toString(),
+                        Throwable::printStackTrace);
 
         disposable = RxTextView
                 .textChanges(binding.passwordEdittext)
-                .subscribe(input -> passwordInput = input.toString());
+                .subscribe(input -> passwordInput = input.toString(),
+                        Throwable::printStackTrace);
+
 
         disposable = RxView
                 .clicks(binding.rememberMeCheckbox)
                 .subscribe(unit -> {
                     if (binding.rememberMeCheckbox.isChecked()) {
                         preferences.edit().putBoolean(
-                                UserAuthFragment.this.getString(R.string.login_checkbox_key), true).apply();
+                                LoginFragment.this.getString(R.string.login_checkbox_key), true).apply();
                         preferences.edit().putString(
-                                UserAuthFragment.this.getString(R.string.user_name_key), emailInput).apply();
+                                LoginFragment.this.getString(R.string.user_name_key), emailInput).apply();
                         preferences.edit().putString(
-                                UserAuthFragment.this.getString(R.string.password_key), passwordInput).apply();
+                                LoginFragment.this.getString(R.string.password_key), passwordInput).apply();
 
                     } else {
                         preferences.edit().putBoolean(
-                                UserAuthFragment.this.getString(R.string.login_checkbox_key), false).apply();
-                        preferences.edit().remove(UserAuthFragment.this.getString(R.string.user_name_key)).apply();
-                        preferences.edit().remove(UserAuthFragment.this.getString(R.string.password_key)).apply();
+                                LoginFragment.this.getString(R.string.login_checkbox_key), false).apply();
+                        preferences.edit().remove(LoginFragment.this.getString(R.string.user_name_key)).apply();
+                        preferences.edit().remove(LoginFragment.this.getString(R.string.password_key)).apply();
                     }
-                });
+                }, Throwable::printStackTrace);
 
 
         disposable = RxView
-                .clicks(binding.emailSignInButton)
+                .clicks(binding.signInButton)
                 .subscribe(unit -> {
                     InputMethodManager mgr = (InputMethodManager) requireActivity()
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -112,7 +112,8 @@ public class UserAuthFragment extends Fragment {
                     if (viewModel.verifyLogin(emailInput, passwordInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }
-                });
+                }, Throwable::printStackTrace);
+
     }
 
 
