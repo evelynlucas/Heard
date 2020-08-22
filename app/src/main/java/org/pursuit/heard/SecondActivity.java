@@ -9,7 +9,7 @@ import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
-import org.pursuit.heard.controller.ViewPagerAdapter;
+import org.pursuit.heard.recyclerview.ViewPagerAdapter;
 import org.pursuit.heard.database.NearbyProfiles;
 
 import org.pursuit.heard.searchFragments.ViewPagerUsersFragment;

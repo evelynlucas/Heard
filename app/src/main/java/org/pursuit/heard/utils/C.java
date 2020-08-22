@@ -4,9 +4,9 @@ public class C {
 
     public static final String PROFILES = "profiles";
     public static final String ARTISTS = "artists";
-    public static final String USER_ID = "userID";
-    public static final String FOLLOWED_ARTISTS = "followedArtists";
-    public static final String ARTIST_IMAGE = "artistImage";
-    public static final String ARTIST_NAME = "artistName";
-    public static final String ARTIST_FOLLOWERS = "artistFollowers";
+    public static final String USER_NAME = "user_name";
+    public static final String FOLLOWED_ARTISTS = "followed_artists";
+    public static final String ARTIST_IMAGE = "artist_image";
+    public static final String ARTIST_NAME = "artist_name";
+    public static final String ARTIST_FOLLOWERS = "artist_followers";
 }

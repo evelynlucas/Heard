@@ -1,4 +1,4 @@
-package org.pursuit.heard.controller;
+package org.pursuit.heard.recyclerview;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import org.pursuit.heard.R;
 import org.pursuit.heard.model.Artist;
-import org.pursuit.heard.view.ArtistSearchViewHolder;
+import org.pursuit.heard.recyclerview.ArtistSearchViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

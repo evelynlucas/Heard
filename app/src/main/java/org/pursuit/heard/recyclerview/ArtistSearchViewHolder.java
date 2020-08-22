@@ -1,4 +1,4 @@
-package org.pursuit.heard.view;
+package org.pursuit.heard.recyclerview;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

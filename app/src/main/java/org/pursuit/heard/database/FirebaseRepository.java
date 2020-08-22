@@ -3,30 +3,32 @@ package org.pursuit.heard.database;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import androidx.lifecycle.ViewModel;
+
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.oakwoodsc.rxfirestore.RxFirestoreDb;
 
 import org.pursuit.heard.model.Artist;
+import org.pursuit.heard.model.User;
 import org.pursuit.heard.utils.C;
+import org.pursuit.heard.viewmodel.UserViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import durdinapps.rxfirebase2.DataSnapshotMapper;
 import durdinapps.rxfirebase2.RxFirebaseAuth;
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
 import durdinapps.rxfirebase2.RxFirestore;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class FirebaseRepository {
@@ -37,7 +39,8 @@ public class FirebaseRepository {
     private final CollectionReference artists = database.collection(C.ARTISTS);
 
     private FirebaseUser currentUser;
-    private DocumentReference userDocRef;
+    private User userData;
+    private DocumentReference currentUserDocRef;
     private boolean loginSuccessful;
 
     @SuppressLint("CheckResult")
@@ -47,17 +50,22 @@ public class FirebaseRepository {
                 .subscribeOn(Schedulers.io())
                 .map(AuthResult::getUser)
                 .subscribe(s -> {
-                    Log.d("AUTH", "reached here: " + username);
-                    setDoc(username);
+                    createUserDoc(username, email);
                 }, Throwable::printStackTrace);
     }
 
     @SuppressLint("CheckResult")
-    private void setDoc(String username) {
+    private void createUserDoc(String username, String email) {
         Map<String, String> update = new HashMap<>();
-        update.put("username", username);
-        RxFirestoreDb.set(profiles.document(), update)
+        update.put(C.USER_NAME, username);
+
+        RxFirestoreDb.set(profiles.document(email), update)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> {
+                    setCurrentUserDocRef(profiles.document(email));
+                    setCurrentUser(authorization.getCurrentUser());
+                    createUserData();
+                })
                 .subscribe(() -> setLoginSuccessful(true),
                         Throwable::printStackTrace);
     }
@@ -70,10 +78,21 @@ public class FirebaseRepository {
                 .map(authResult -> authResult.getUser() != null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(logged -> {
-                    this.currentUser = authorization.getCurrentUser();
-                    setLoginSuccessful(true);
+                    setCurrentUserDocRef(profiles.document(email));
+                    setCurrentUser(authorization.getCurrentUser());
+                    createUserData();
+                    setLoginSuccessful(logged);
                 }, Throwable::printStackTrace);
     }
+
+    @SuppressLint("CheckResult")
+    private void createUserData() {
+        if (currentUser.getEmail() != null) {
+            RxFirestore.getDocument(profiles.document(currentUser.getEmail()), User.class)
+                    .subscribe(this::setUserData, Throwable::printStackTrace);
+        }
+    }
+
 
     public void setLoginSuccessful(boolean loginSuccessful) {
         this.loginSuccessful = loginSuccessful;
@@ -83,46 +102,63 @@ public class FirebaseRepository {
         return loginSuccessful;
     }
 
-    public FirebaseAuth getAuthorization() {
-        return authorization;
-    }
-
     public FirebaseFirestore getDatabase() {
         return database;
+    }
+
+    public DocumentReference getCurrentUserDocRef() {
+        return currentUserDocRef;
+    }
+
+    public void setCurrentUserDocRef(DocumentReference currentUserDocRef) {
+        this.currentUserDocRef = currentUserDocRef;
     }
 
     public FirebaseUser getCurrentUser() {
         return currentUser;
     }
 
-    public void fetchFollowedArtists() {
-        Query query = profiles.whereEqualTo(C.USER_ID, currentUser.getUid());
-        //     RxFirebaseDatabase.observeSingleValueEvent(query, Artist.class)
+    public void setCurrentUser(FirebaseUser currentUser) {
+        this.currentUser = currentUser;
+    }
 
+    public User getUserData() {
+        return userData;
+    }
+
+    public void setUserData(User userData) {
+        this.userData = userData;
+    }
+
+    public void fetchFollowedArtists() {
     }
 
     public void updateFollowedArtists(Artist artist) {
-        updateArtistForUser(artist.getArtistName());
-        updateArtistFollowers(artist);
-    }
-
-    @SuppressLint("CheckResult")
-    private void updateArtistForUser(String artistName) {
         Map<String, Object> update = new HashMap<>();
-        update.put(C.FOLLOWED_ARTISTS, FieldValue.arrayUnion(artistName));
+        update.put(C.FOLLOWED_ARTISTS, FieldValue.arrayUnion(artist.getArtistName()));
 
-        Query query = profiles.whereEqualTo(C.USER_ID, currentUser.getUid());
-        RxFirestoreDb.querySnapshots(query)
-                .subscribeOn(Schedulers.io())
-                .map(QuerySnapshot::getDocuments)
-                .takeWhile(ds -> !ds.isEmpty())
-                .map(ds -> ds.get(0))
-                .subscribe(d -> {
-                    RxFirestoreDb
-                            .update(d.getReference(), update)
-                            .subscribe();
-                }, Throwable::printStackTrace);
+        if (currentUser.getEmail() != null) {
+            RxFirestoreDb.update(profiles.document(currentUser.getEmail()), update)
+                    .subscribeOn(Schedulers.io())
+                    .doOnTerminate(() -> updateArtistFollowers(artist))
+                    .doOnError(Throwable::printStackTrace)
+                    .subscribe();
+        }
+
+        //        Query query = profiles.whereEqualTo(C.USER_ID, currentUser.getUid());
+//        RxFirestoreDb.querySnapshots(query)
+//                .subscribeOn(Schedulers.io())
+//                .map(QuerySnapshot::getDocuments)
+//                .takeWhile(ds -> !ds.isEmpty())
+//                .map(ds -> ds.get(0))
+//                .subscribe(d -> {
+//                    RxFirestoreDb
+//                            .update(d.getReference(), update)
+//                            .subscribe();
+//                }, Throwable::printStackTrace);
+
     }
+
 
     @SuppressLint("CheckResult")
     private void updateArtistFollowers(Artist artist) {
@@ -131,21 +167,25 @@ public class FirebaseRepository {
         update.put(C.ARTIST_IMAGE, artist.getArtworkUrl100());
         update.put(C.ARTIST_FOLLOWERS, FieldValue.arrayUnion(currentUser.getUid()));
 
-        Query query = artists.whereEqualTo(C.ARTIST_NAME, artist.getArtistName());
-        RxFirestoreDb.querySnapshots(query)
-                .subscribeOn(Schedulers.io())
-                .map(QuerySnapshot::getDocuments)
-                .subscribe(ds -> {
-                    if (!ds.isEmpty()) {
-                        RxFirestoreDb
-                                .setAndMerge(ds.get(0).getReference(), update)
-                                .subscribe();
-                    } else {
-                        RxFirestoreDb
-                                .set(artists.document(), update)
-                                .subscribe();
-                    }
-                }, Throwable::printStackTrace);
+        RxFirestoreDb.setAndMerge(artists.document(artist.getArtistName()), update)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace)
+                .subscribe();
+//        Query query = artists.whereEqualTo(C.ARTIST_NAME, artist.getArtistName());
+//        RxFirestoreDb.querySnapshots(query)
+//                .subscribeOn(Schedulers.io())
+//                .map(QuerySnapshot::getDocuments)
+//                .subscribe(ds -> {
+//                    if (!ds.isEmpty()) {
+//                        RxFirestoreDb
+//                                .setAndMerge(ds.get(0).getReference(), update)
+//                                .subscribe();
+//                    } else {
+//                        RxFirestoreDb
+//                                .set(artists.document(artist.getArtistName()), update)
+//                                .subscribe();
+//                    }
+//                }, Throwable::printStackTrace);
 
     }
 

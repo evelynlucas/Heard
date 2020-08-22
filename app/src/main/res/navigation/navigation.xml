@@ -13,10 +13,12 @@
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_welcomeFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
+            app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="false" />
     </fragment>
 
@@ -27,7 +29,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_mainUserFragment"
-            app:destination="@id/mainUserFragment" />
+            app:destination="@id/mainUserFragment"
+            app:popUpTo="@id/mainUserFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -37,7 +41,8 @@
         tools:layout="@layout/fragment_main_user">
         <action
             android:id="@+id/action_mainUserFragment_to_addArtistFragment"
-            app:destination="@id/addArtistFragment" />
+            app:destination="@id/addArtistFragment"
+            app:popUpTo="@id/mainUserFragment" />
     </fragment>
 
     <fragment
@@ -50,5 +55,11 @@
         android:id="@+id/signUpFragment"
         tools:layout="@layout/fragment_signup"
         android:name="org.pursuit.heard.fragments.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_mainUserFragment"
+            app:destination="@id/mainUserFragment"
+            app:popUpTo="@id/mainUserFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

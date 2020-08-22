@@ -4,19 +4,22 @@ import java.util.List;
 
 public class User {
 
-    private String userName;
-    private List<Artist> likedArtists;
+    private String user_name;
+    private List<String> followed_artists;
 
-    public User(String userName, List<Artist> likedArtists) {
-        this.userName = userName;
-        this.likedArtists = likedArtists;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public String getUserName() {
-        return userName;
+    public List<String> getFollowed_artists() {
+        return followed_artists;
     }
 
-    public List<Artist> getLikedArtists() {
-        return likedArtists;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public void setFollowed_artists(List<String> followed_artists) {
+        this.followed_artists = followed_artists;
     }
 }

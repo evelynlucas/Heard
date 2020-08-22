@@ -56,6 +56,7 @@ public class WelcomeFragment extends Fragment {
                     Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_signUpFragment);
                 });
             }
-        }, 2000);
+        }, 3000);
     }
+
 }

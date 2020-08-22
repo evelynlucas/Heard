@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,12 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
-import org.pursuit.heard.controller.ArtistPresentAdapter;
+import org.pursuit.heard.recyclerview.ArtistPresentAdapter;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
-import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.viewmodel.UserViewModel;
-
-import java.util.List;
 
 public class MainUserFragment extends Fragment {
 
@@ -48,7 +43,7 @@ public class MainUserFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userName = viewModel.getUserName();
+        userName = viewModel.getUsername();
         binding.userMainProfileName.setText("Hello " + userName);
         RecyclerView mainUserArtists = binding.recyclerViewContainerMainUserFragment;
 

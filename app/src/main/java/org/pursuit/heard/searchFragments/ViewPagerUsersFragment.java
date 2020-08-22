@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.pursuit.heard.R;
-import org.pursuit.heard.controller.ArtistPresentAdapter;
+import org.pursuit.heard.recyclerview.ArtistPresentAdapter;
 import org.pursuit.heard.database.UserProfile;
 import org.pursuit.heard.model.Artist;
 

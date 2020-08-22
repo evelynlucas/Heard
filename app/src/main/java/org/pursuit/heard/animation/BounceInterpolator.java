@@ -7,7 +7,6 @@ public class BounceInterpolator implements Interpolator {
     private double myAmp = 1;
     private double myFreq = 10;
 
-
     public BounceInterpolator(double myAmp, double myFreq) {
         this.myAmp = myAmp;
         this.myFreq = myFreq;

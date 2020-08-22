@@ -1,15 +1,19 @@
 package org.pursuit.heard.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.jakewharton.rxbinding3.view.RxView;
 import com.jakewharton.rxbinding3.widget.RxTextView;
@@ -58,8 +62,20 @@ public class SignUpFragment extends Fragment {
                 .clicks(binding.signUpButton)
                 .takeWhile(u -> !usernameInput.isEmpty())
                 .subscribe(complete -> {
-                  UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-                  viewModel.setNewUser(emailInput, passwordInput, usernameInput);
+                    InputMethodManager mgr = (InputMethodManager) requireActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
+
+                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+                    if (viewModel.setNewUser(emailInput, passwordInput, usernameInput)) {
+                        Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_mainUserFragment);
+                    }
                 }, Throwable::printStackTrace);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

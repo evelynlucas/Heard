@@ -1,4 +1,4 @@
-package org.pursuit.heard.controller;
+package org.pursuit.heard.recyclerview;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

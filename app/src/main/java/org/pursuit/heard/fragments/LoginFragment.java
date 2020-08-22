@@ -27,19 +27,16 @@ import io.reactivex.disposables.Disposable;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    private UserViewModel viewModel;
+    private SharedPreferences preferences;
+    private Disposable disposable;
 
     private String emailInput;
     private String passwordInput;
-
-    private SharedPreferences preferences;
-    private Disposable disposable;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         checkPreferences();
         return binding.getRoot();
     }
@@ -81,7 +78,6 @@ public class LoginFragment extends Fragment {
                 .subscribe(input -> passwordInput = input.toString(),
                         Throwable::printStackTrace);
 
-
         disposable = RxView
                 .clicks(binding.rememberMeCheckbox)
                 .subscribe(unit -> {
@@ -109,13 +105,12 @@ public class LoginFragment extends Fragment {
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
 
+                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
                     if (viewModel.verifyLogin(emailInput, passwordInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }
                 }, Throwable::printStackTrace);
-
     }
-
 
     @Override
     public void onDestroy() {
