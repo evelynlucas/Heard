@@ -93,7 +93,6 @@ public class FirebaseRepository {
         }
     }
 
-
     public void setLoginSuccessful(boolean loginSuccessful) {
         this.loginSuccessful = loginSuccessful;
     }
@@ -144,49 +143,19 @@ public class FirebaseRepository {
                     .doOnError(Throwable::printStackTrace)
                     .subscribe();
         }
-
-        //        Query query = profiles.whereEqualTo(C.USER_ID, currentUser.getUid());
-//        RxFirestoreDb.querySnapshots(query)
-//                .subscribeOn(Schedulers.io())
-//                .map(QuerySnapshot::getDocuments)
-//                .takeWhile(ds -> !ds.isEmpty())
-//                .map(ds -> ds.get(0))
-//                .subscribe(d -> {
-//                    RxFirestoreDb
-//                            .update(d.getReference(), update)
-//                            .subscribe();
-//                }, Throwable::printStackTrace);
-
     }
-
 
     @SuppressLint("CheckResult")
     private void updateArtistFollowers(Artist artist) {
         Map<String, Object> update = new HashMap<>();
         update.put(C.ARTIST_NAME, artist.getArtistName());
         update.put(C.ARTIST_IMAGE, artist.getArtworkUrl100());
-        update.put(C.ARTIST_FOLLOWERS, FieldValue.arrayUnion(currentUser.getUid()));
+        update.put(C.ARTIST_FOLLOWERS, FieldValue.arrayUnion(currentUser.getEmail()));
 
         RxFirestoreDb.setAndMerge(artists.document(artist.getArtistName()), update)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(Throwable::printStackTrace)
                 .subscribe();
-//        Query query = artists.whereEqualTo(C.ARTIST_NAME, artist.getArtistName());
-//        RxFirestoreDb.querySnapshots(query)
-//                .subscribeOn(Schedulers.io())
-//                .map(QuerySnapshot::getDocuments)
-//                .subscribe(ds -> {
-//                    if (!ds.isEmpty()) {
-//                        RxFirestoreDb
-//                                .setAndMerge(ds.get(0).getReference(), update)
-//                                .subscribe();
-//                    } else {
-//                        RxFirestoreDb
-//                                .set(artists.document(artist.getArtistName()), update)
-//                                .subscribe();
-//                    }
-//                }, Throwable::printStackTrace);
-
     }
 
 //    public Observable<List<Artist>> getFollowedArtists() {

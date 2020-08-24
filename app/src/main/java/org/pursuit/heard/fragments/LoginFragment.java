@@ -105,8 +105,7 @@ public class LoginFragment extends Fragment {
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
 
-                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-                    if (viewModel.verifyLogin(emailInput, passwordInput)) {
+                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class)if (viewModel.verifyLogin(emailInput, passwordInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }
                 }, Throwable::printStackTrace);
