@@ -170,8 +170,9 @@ public class FirebaseRepository {
     @SuppressLint("CheckResult")
     public void fetchFollowedArtists(final FetchArtistListener listener) {
         if (currentUser.getEmail() != null) {
-            Query query = artists.whereArrayContains(C.ARTIST_FOLLOWERS, currentUser.getEmail());.
+            Query query = artists.whereArrayContains(C.ARTIST_FOLLOWERS, currentUser.getEmail());
             RxFirestoreDb.querySnapshots(query)
+                    .subscribeOn(Schedulers.io())
                     .map(QuerySnapshot::getDocuments)
                     .map(d -> {
                         List<Artist> result = new ArrayList<>();
@@ -181,6 +182,7 @@ public class FirebaseRepository {
                         }
                         return result;
                     })
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(list -> {
                         Log.d("FETCHARTISTS", String.valueOf(list.size()));
                         listener.onArtistReceived(list);
