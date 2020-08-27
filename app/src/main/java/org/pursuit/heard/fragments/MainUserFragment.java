@@ -2,6 +2,7 @@ package org.pursuit.heard.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 import org.pursuit.heard.R;
 import org.pursuit.heard.SecondActivity;
+import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.recyclerview.ArtistPresentAdapter;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
 import org.pursuit.heard.viewmodel.UserViewModel;
+
+import java.util.List;
 
 public class MainUserFragment extends Fragment {
 
@@ -53,11 +59,12 @@ public class MainUserFragment extends Fragment {
         final ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
         mainUserArtists.setAdapter(artistPresentAdapter);
 
-//        MutableLiveData<List<Artist>> likedArtists = viewModel.getFollowedArtists();
-//        likedArtists.observe(getViewLifecycleOwner(), artists -> {
-//            artistPresentAdapter.setData(artists);
-//            artistPresentAdapter.notifyDataSetChanged();
-//        });
+        MutableLiveData<List<Artist>> likedArtists = viewModel.getFollowedArtists();
+        likedArtists.observe(getViewLifecycleOwner(), artists -> {
+            Log.d("FETCHARTISTS", String.valueOf(artists.size()));
+            artistPresentAdapter.setData(artists);
+            artistPresentAdapter.notifyDataSetChanged();
+        });
     }
 
     private void setButtons() {

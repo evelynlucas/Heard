@@ -3,8 +3,10 @@ package org.pursuit.heard.database;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,20 +16,28 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.oakwoodsc.rxfirestore.QueryObjectsResponse;
 import com.oakwoodsc.rxfirestore.RxFirestoreDb;
 
 import org.pursuit.heard.model.Artist;
 import org.pursuit.heard.model.User;
 import org.pursuit.heard.utils.C;
+import org.pursuit.heard.viewmodel.FetchArtistListener;
 import org.pursuit.heard.viewmodel.UserViewModel;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import durdinapps.rxfirebase2.DataSnapshotMapper;
 import durdinapps.rxfirebase2.RxFirebaseAuth;
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
+import durdinapps.rxfirebase2.RxFirebaseQuery;
 import durdinapps.rxfirebase2.RxFirestore;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -129,8 +139,6 @@ public class FirebaseRepository {
         this.userData = userData;
     }
 
-    public void fetchFollowedArtists() {
-    }
 
     public void updateFollowedArtists(Artist artist) {
         Map<String, Object> update = new HashMap<>();
@@ -158,10 +166,25 @@ public class FirebaseRepository {
                 .subscribe();
     }
 
-//    public Observable<List<Artist>> getFollowedArtists() {
-//
-//
-//    }
+    @SuppressLint("CheckResult")
+    public void fetchFollowedArtists(final FetchArtistListener listener) {
+        if (currentUser.getEmail() != null) {
+            Query query = artists.whereArrayContains(C.ARTIST_FOLLOWERS, currentUser.getEmail());
+            RxFirestoreDb.queryObjects(query, Artist.class)
+                    .subscribeOn(Schedulers.io())
+                    .map(QueryObjectsResponse::getObjects)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(list -> {
+                        Log.d("FETCHARTISTS", String.valueOf(list.size()));
+                        listener.onArtistReceived(list);
+                    }, error -> {
+                        error.printStackTrace();
+                        Log.d("FETCHARTISTS", "did not get artists");
+                    });
 
+
+
+        }
+    }
 
 }

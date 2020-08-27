@@ -44,6 +44,26 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.updateFollowedArtists(artist);
     }
 
+    public void fetchUserArtists() {
+        database.fetchFollowedArtists(new FetchArtistListener() {
+            @Override
+            public void onArtistReceived(List<Artist> results) {
+                Log.d("FETCHARTISTS", String.valueOf(results.size()));
+                followedArtists.setValue(results);
+                setFollowedArtists(followedArtists);
+
+            }
+        });
+    }
+
+    public void setFollowedArtists(MutableLiveData<List<Artist>> followedArtists) {
+        this.followedArtists = followedArtists;
+    }
+
+    public MutableLiveData<List<Artist>> getFollowedArtists() {
+        return followedArtists;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -52,3 +72,4 @@ public class UserViewModel extends ViewModel implements Serializable {
         this.username = username;
     }
 }
+

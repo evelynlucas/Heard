@@ -9,4 +9,9 @@ public class C {
     public static final String ARTIST_IMAGE = "artist_image";
     public static final String ARTIST_NAME = "artist_name";
     public static final String ARTIST_FOLLOWERS = "artist_followers";
+
+    public static final String SHARED_PREFS = "sharedPrefsKey";
+    public static final String SP_USERNAME = "usernameKey";
+    public static final String SP_PASSWORD = "passwordKey";
+    public static final String SP_LOGIN_CHECKBOX = "loginCheckBoxKey";
 }
