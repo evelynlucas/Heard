@@ -23,7 +23,7 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.createUser(email, password, username);
         if (database.isLoginSuccessful()) {
             user = database.getUserData();
-            setUsername(user.getUser_name());
+       //     setUsername(user.getUser_name());
             return true;
         }
         return false;
@@ -33,7 +33,7 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.verifyLogin(email, password);
         if (database.isLoginSuccessful()) {
             user = database.getUserData();
-            setUsername(user.getUser_name());
+//            setUsername(user.getUser_name());
             return true;
         }
         return false;
@@ -45,14 +45,9 @@ public class UserViewModel extends ViewModel implements Serializable {
     }
 
     public void fetchUserArtists() {
-        database.fetchFollowedArtists(new FetchArtistListener() {
-            @Override
-            public void onArtistReceived(List<Artist> results) {
-                Log.d("FETCHARTISTS", String.valueOf(results.size()));
-                followedArtists.setValue(results);
-                setFollowedArtists(followedArtists);
-
-            }
+        database.fetchFollowedArtists(results -> {
+            followedArtists.setValue(results);
+            setFollowedArtists(followedArtists);
         });
     }
 

@@ -26,6 +26,7 @@ import org.pursuit.heard.utils.C;
 import org.pursuit.heard.viewmodel.FetchArtistListener;
 import org.pursuit.heard.viewmodel.UserViewModel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -169,21 +170,21 @@ public class FirebaseRepository {
     @SuppressLint("CheckResult")
     public void fetchFollowedArtists(final FetchArtistListener listener) {
         if (currentUser.getEmail() != null) {
-            Query query = artists.whereArrayContains(C.ARTIST_FOLLOWERS, currentUser.getEmail());
-            RxFirestoreDb.queryObjects(query, Artist.class)
-                    .subscribeOn(Schedulers.io())
-                    .map(QueryObjectsResponse::getObjects)
-                    .observeOn(AndroidSchedulers.mainThread())
+            Query query = artists.whereArrayContains(C.ARTIST_FOLLOWERS, currentUser.getEmail());.
+            RxFirestoreDb.querySnapshots(query)
+                    .map(QuerySnapshot::getDocuments)
+                    .map(d -> {
+                        List<Artist> result = new ArrayList<>();
+                        for (DocumentSnapshot ds: d) {
+                            result.add(new Artist( (String) ds.get(C.ARTIST_NAME),
+                                    (String) ds.get(C.ARTIST_IMAGE)));
+                        }
+                        return result;
+                    })
                     .subscribe(list -> {
                         Log.d("FETCHARTISTS", String.valueOf(list.size()));
                         listener.onArtistReceived(list);
-                    }, error -> {
-                        error.printStackTrace();
-                        Log.d("FETCHARTISTS", "did not get artists");
-                    });
-
-
-
+                    }, Throwable::printStackTrace);
         }
     }
 

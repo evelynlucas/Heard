@@ -59,12 +59,12 @@ public class MainUserFragment extends Fragment {
         final ArtistPresentAdapter artistPresentAdapter = new ArtistPresentAdapter();
         mainUserArtists.setAdapter(artistPresentAdapter);
 
-        MutableLiveData<List<Artist>> likedArtists = viewModel.getFollowedArtists();
-        likedArtists.observe(getViewLifecycleOwner(), artists -> {
-            Log.d("FETCHARTISTS", String.valueOf(artists.size()));
+        viewModel.fetchUserArtists();
+        viewModel.getFollowedArtists().observe(getViewLifecycleOwner(), artists -> {
             artistPresentAdapter.setData(artists);
             artistPresentAdapter.notifyDataSetChanged();
         });
+
     }
 
     private void setButtons() {
@@ -75,7 +75,7 @@ public class MainUserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SecondActivity.class);
-           //     intent.putExtra("USERNAME", userName);
+                //     intent.putExtra("USERNAME", userName);
                 startActivity(intent);
             }
         });
