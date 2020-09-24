@@ -1,7 +1,5 @@
 package org.pursuit.heard.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -23,7 +21,7 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.createUser(email, password, username);
         if (database.isLoginSuccessful()) {
             user = database.getUserData();
-       //     setUsername(user.getUser_name());
+            setUsername(user.getUser_name());
             return true;
         }
         return false;
@@ -33,12 +31,11 @@ public class UserViewModel extends ViewModel implements Serializable {
         database.verifyLogin(email, password);
         if (database.isLoginSuccessful()) {
             user = database.getUserData();
-//            setUsername(user.getUser_name());
+            setUsername(user.getUser_name());
             return true;
         }
         return false;
     }
-
 
     public void addArtistForUser(Artist artist){
         database.updateFollowedArtists(artist);
@@ -47,9 +44,11 @@ public class UserViewModel extends ViewModel implements Serializable {
     public void fetchUserArtists() {
         database.fetchFollowedArtists(results -> {
             followedArtists.setValue(results);
-            setFollowedArtists(followedArtists);
+            UserViewModel.this.setFollowedArtists(followedArtists);
         });
     }
+
+   // public List<User> fetchUserMatches()
 
     public void setFollowedArtists(MutableLiveData<List<Artist>> followedArtists) {
         this.followedArtists = followedArtists;

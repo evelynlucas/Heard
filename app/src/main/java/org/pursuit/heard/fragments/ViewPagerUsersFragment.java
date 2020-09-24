@@ -1,4 +1,4 @@
-package org.pursuit.heard.searchFragments;
+package org.pursuit.heard.fragments;
 
 
 import android.os.Bundle;

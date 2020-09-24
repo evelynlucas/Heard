@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context=".searchFragments.ViewPagerUsersFragment">
+    tools:context=".fragments.ViewPagerUsersFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_pager"

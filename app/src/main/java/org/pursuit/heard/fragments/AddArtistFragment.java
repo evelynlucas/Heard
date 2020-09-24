@@ -23,7 +23,6 @@ import org.pursuit.heard.viewmodel.UserViewModel;
 public class AddArtistFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private UserViewModel viewModel;
-    private ProfileDatabase database;
     private FragmentAddArtistBinding binding;
 
     @Override
@@ -44,7 +43,6 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
             binding.artistCardView.setVisibility(View.VISIBLE);
             binding.artistResultName.setText(model.getArtistName());
             Picasso.get().load(model.getArtworkUrl100()).into(binding.artistImage);
-
 
             RxView.clicks(binding.addArtistButton)
                     .subscribe(unit -> {

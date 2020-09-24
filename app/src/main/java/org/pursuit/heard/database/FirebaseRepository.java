@@ -177,17 +177,17 @@ public class FirebaseRepository {
                     .map(d -> {
                         List<Artist> result = new ArrayList<>();
                         for (DocumentSnapshot ds: d) {
-                            result.add(new Artist( (String) ds.get(C.ARTIST_NAME),
+                            result.add(new Artist(
+                                    (String) ds.get(C.ARTIST_NAME),
                                     (String) ds.get(C.ARTIST_IMAGE)));
                         }
                         return result;
                     })
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(list -> {
-                        Log.d("FETCHARTISTS", String.valueOf(list.size()));
-                        listener.onArtistReceived(list);
-                    }, Throwable::printStackTrace);
+                    .subscribe(listener::onArtistReceived, Throwable::printStackTrace);
         }
     }
+
+  //  public void findUserMatches()
 
 }

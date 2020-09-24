@@ -43,6 +43,9 @@
             android:id="@+id/action_mainUserFragment_to_addArtistFragment"
             app:destination="@id/addArtistFragment"
             app:popUpTo="@id/mainUserFragment" />
+        <action
+            android:id="@+id/action_mainUserFragment_to_userMatchFragment"
+            app:destination="@id/userMatchFragment" />
     </fragment>
 
     <fragment
@@ -62,4 +65,10 @@
             app:popUpTo="@id/mainUserFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/userMatchFragment"
+        android:name="org.pursuit.heard.fragments.UserMatchFragment"
+        tools:layout="@layout/fragment_user_match"
+        android:label="UserMatchFragment" />
 </navigation>
