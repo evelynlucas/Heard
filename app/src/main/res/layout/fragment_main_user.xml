@@ -6,7 +6,7 @@
     <data>
         <variable
             name="userViewModel"
-            type="org.pursuit.heard.viewmodel.UserViewModel" />
+            type="org.pursuit.heard.viewmodel.MainUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

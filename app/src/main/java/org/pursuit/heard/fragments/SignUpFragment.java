@@ -2,7 +2,6 @@ package org.pursuit.heard.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 
 import org.pursuit.heard.R;
 import org.pursuit.heard.databinding.FragmentSignupBinding;
-import org.pursuit.heard.viewmodel.UserViewModel;
+import org.pursuit.heard.viewmodel.MainUserViewModel;
 
 import io.reactivex.disposables.Disposable;
 
@@ -66,7 +65,7 @@ public class SignUpFragment extends Fragment {
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
 
-                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+                    MainUserViewModel viewModel = new ViewModelProvider(requireActivity()).get(MainUserViewModel.class);
                     if (viewModel.setNewUser(emailInput, passwordInput, usernameInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_mainUserFragment);
                     }

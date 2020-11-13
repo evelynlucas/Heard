@@ -15,14 +15,13 @@ import com.jakewharton.rxbinding3.view.RxView;
 import com.squareup.picasso.Picasso;
 
 import org.pursuit.heard.R;
-import org.pursuit.heard.database.ProfileDatabase;
 import org.pursuit.heard.databinding.FragmentAddArtistBinding;
 import org.pursuit.heard.network.ArtistSearchManager;
-import org.pursuit.heard.viewmodel.UserViewModel;
+import org.pursuit.heard.viewmodel.MainUserViewModel;
 
 public class AddArtistFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    private UserViewModel viewModel;
+    private MainUserViewModel viewModel;
     private FragmentAddArtistBinding binding;
 
     @Override
@@ -32,7 +31,7 @@ public class AddArtistFragment extends Fragment implements SearchView.OnQueryTex
                 inflater, R.layout.fragment_add_artist, container, false);
         binding.artistSearchview.setOnQueryTextListener(this);
         binding.artistCardView.setVisibility(View.GONE);
-        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(MainUserViewModel.class);
         return binding.getRoot();
     }
 

@@ -3,6 +3,7 @@ package org.pursuit.heard.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 import org.pursuit.heard.R;
 import org.pursuit.heard.databinding.FragmentLoginBinding;
 import org.pursuit.heard.utils.C;
-import org.pursuit.heard.viewmodel.UserViewModel;
+import org.pursuit.heard.viewmodel.MainUserViewModel;
 
 import io.reactivex.disposables.Disposable;
 
@@ -102,11 +103,13 @@ public class LoginFragment extends Fragment {
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.passwordEdittext.getWindowToken(), 0);
 
-                    UserViewModel viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+                    MainUserViewModel viewModel = new ViewModelProvider(requireActivity()).get(MainUserViewModel.class);
                     if (viewModel.verifyLogin(emailInput, passwordInput)) {
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_mainUserFragment);
                     }
-                }, Throwable::printStackTrace);
+                }, e -> {
+                    Log.d("LOGIN", "message " + e.getMessage());
+                });
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.pursuit.heard.database;
 
 import org.pursuit.heard.model.Artist;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class UserProfile  {

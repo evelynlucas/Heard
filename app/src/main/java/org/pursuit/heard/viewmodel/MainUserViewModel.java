@@ -1,5 +1,7 @@
 package org.pursuit.heard.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,9 +12,9 @@ import org.pursuit.heard.model.User;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserViewModel extends ViewModel implements Serializable {
+public class MainUserViewModel extends ViewModel implements Serializable {
 
-    private FirebaseRepository database = new FirebaseRepository();
+    private FirebaseRepository database = FirebaseRepository.getInstance();
     private User user;
     private String username;
     private MutableLiveData<List<Artist>> followedArtists = new MutableLiveData<>();
@@ -32,6 +34,8 @@ public class UserViewModel extends ViewModel implements Serializable {
         if (database.isLoginSuccessful()) {
             user = database.getUserData();
             setUsername(user.getUser_name());
+            String e = database.getCurrentUser().getEmail();
+            Log.d("EMAIL", "firebase " + e);
             return true;
         }
         return false;
@@ -42,13 +46,14 @@ public class UserViewModel extends ViewModel implements Serializable {
     }
 
     public void fetchUserArtists() {
-        database.fetchFollowedArtists(results -> {
-            followedArtists.setValue(results);
-            UserViewModel.this.setFollowedArtists(followedArtists);
+        database.fetchFollowedArtists(new FetchArtistListener() {
+            @Override
+            public void onArtistReceived(List<Artist> results) {
+                followedArtists.setValue(results);
+                MainUserViewModel.this.setFollowedArtists(followedArtists);
+            }
         });
     }
-
-   // public List<User> fetchUserMatches()
 
     public void setFollowedArtists(MutableLiveData<List<Artist>> followedArtists) {
         this.followedArtists = followedArtists;

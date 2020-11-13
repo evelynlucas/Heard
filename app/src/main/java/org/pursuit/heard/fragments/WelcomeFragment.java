@@ -1,6 +1,7 @@
 package org.pursuit.heard.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import org.pursuit.heard.databinding.WelcomeFragmentBinding;
 public class WelcomeFragment extends Fragment {
 
     private WelcomeFragmentBinding binding;
+    private SharedPreferences preferences;
 
     @Nullable
     @Override
@@ -47,6 +49,7 @@ public class WelcomeFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 binding.signInButton.setVisibility(View.VISIBLE);
                 RxView.clicks(binding.signInButton).subscribe(unit -> {
                     Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_loginFragment);

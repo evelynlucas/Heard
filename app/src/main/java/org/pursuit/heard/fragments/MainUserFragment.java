@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 import org.pursuit.heard.R;
-import org.pursuit.heard.recyclerview.ArtistPresentAdapter;
 import org.pursuit.heard.databinding.FragmentMainUserBinding;
-import org.pursuit.heard.viewmodel.UserViewModel;
+import org.pursuit.heard.recyclerview.ArtistPresentAdapter;
+import org.pursuit.heard.viewmodel.MainUserViewModel;
 
 public class MainUserFragment extends Fragment {
 
-    private UserViewModel viewModel;
+    private MainUserViewModel viewModel;
     private FragmentMainUserBinding binding;
 
     @Override
@@ -31,10 +31,9 @@ public class MainUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_main_user, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(MainUserViewModel.class);
         return binding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {

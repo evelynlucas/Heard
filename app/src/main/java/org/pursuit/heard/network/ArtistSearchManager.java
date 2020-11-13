@@ -2,10 +2,7 @@ package org.pursuit.heard.network;
 
 import android.annotation.SuppressLint;
 
-import org.pursuit.heard.model.Artist;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ArtistSearchManager {
